@@ -1,0 +1,39 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Angular specific
+.angular/
+
+# Output directories
+dist/
+build/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Wrangler (Cloudflare Workers specific)
+.wrangler/
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.env
+
+# System specific files
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Docker-related
+docker-compose.override.yml
+Dockerfile
+
+# Miscellaneous
+*.log
+*.tmp
+*.temp

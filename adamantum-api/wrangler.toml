@@ -1,0 +1,7 @@
+name = "adamantum-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-07"
+[[d1_databases]]
+binding = "adamantumDb" # available in your Worker on env.DB
+database_name = "adamantum-db"
+database_id = "9bf78a8d-8818-4c8c-ad44-752651467152"
