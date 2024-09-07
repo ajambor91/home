@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IApiRoutes} from "../models/api.model";
 import {EnvironmentsService} from "./environments.service";
+import {Posts, PostsRoutes} from "api-types";
 
 @Injectable()
 export class ApiService {
@@ -11,12 +12,12 @@ export class ApiService {
 
   }
 
-  public getRoutes(): Observable<IApiRoutes> {
-    return this.httpClient.get<IApiRoutes>(`${this._apiUrl}posts`);
+  public getRoutes(): Observable<PostsRoutes> {
+    return this.httpClient.get<PostsRoutes>(`${this._apiUrl}routes`);
   }
 
-  public getPost(): Observable<any> {
-    return this.httpClient.get(`${this._apiUrl}posts/xxx`)
+  public getPost(): Observable<Posts> {
+    return this.httpClient.get<Posts>(`${this._apiUrl}posts/xxx`)
   }
 
 }

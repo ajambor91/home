@@ -5,6 +5,7 @@ import {map, Observable, shareReplay} from "rxjs";
 import {IRouteEx, IRoutesEx, ITreeNodeRoutes} from "../models/route.model";
 import {IApiRoutes} from "../models/api.model";
 import {GenericPostComponent} from "../components/main-page/generic-post/generic-post.component";
+import {PostRoute, PostsRoutes} from "api-types";
 
 @Injectable()
 export class RoutesService {
@@ -16,10 +17,10 @@ export class RoutesService {
     return this._routes.pipe(map(this.mergeRoutes.bind(this)));
   }
 
-  private mergeRoutes(apiRoutes: IApiRoutes): ITreeNodeRoutes {
-    const externalRoutes: IRouteEx[] = apiRoutes.map(item => ({
-      path: item.path,
-      routeName: item.path,
+  private mergeRoutes(apiRoutes: PostsRoutes): ITreeNodeRoutes {
+    const externalRoutes: IRouteEx[] = apiRoutes.map((item: PostRoute) => ({
+      path: item.fullPath,
+      routeName: item.fullPath,
       external: true,
       component: GenericPostComponent,
       category: item.category

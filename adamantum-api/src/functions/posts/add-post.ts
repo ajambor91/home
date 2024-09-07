@@ -6,8 +6,8 @@ import {INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE, OK_RESPONSE} from ".
 
 export async function addPost(request: HttpRequest<NewPostPayload>): Promise<Response> {
     try {
-        await request.env.adamantumDb.prepare("INSERT INTO Posts (PostTitle, PostContent) VALUES (?, ?)")
-            .bind(request.body.postTitle, request.body.postContent)
+        await request.env.adamantumDb.prepare("INSERT INTO posts (postTitle, postContent, fullPath, category) VALUES (?, ?, ?, ?)")
+            .bind(request.body.postTitle, request.body.postContent, request.body.postTitle, 'bbb')
             .run();
         return createResponse(OK_RESPONSE);
 
