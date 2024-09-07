@@ -1,6 +1,6 @@
 import {IEnvironments} from "../app/models/environments.model";
 
 export const environment: IEnvironments = {
-  apiUrl: 'http://localhost:3000/',
+  apiUrl: 'http://127.0.0.1:8787/api/',
   production: false
 };
