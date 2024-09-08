@@ -5,6 +5,7 @@ import {jsonify} from "./core/middleware/jsonify";
 import {getPostsRoutes} from "./functions/posts/get-posts-routes";
 import {loginUser} from "./functions/users/login-user";
 import {addUser} from "./functions/users/add-user";
+import {authGuard} from "./core/guards/auth.guard";
 
 export const routes: Routes = [
     {
@@ -18,10 +19,11 @@ export const routes: Routes = [
         function: getPostsRoutes
     },
     {
-        pathname: '/api/posts',
+        pathname: '/api/post',
         method: 'POST',
         function: addPost,
-        middleware: jsonify
+        middleware: jsonify,
+        guard: authGuard
     },
     {
         pathname: '/api/users/login',

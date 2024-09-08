@@ -2,6 +2,9 @@ name = "adamantum-api"
 main = "src/index.ts"
 compatibility_date = "2024-09-07"
 [[d1_databases]]
-binding = "adamantumDb" # available in your Worker on env.DB
+binding = "adamantumDb"
 database_name = "adamantum-db"
 database_id = "9bf78a8d-8818-4c8c-ad44-752651467152"
+
+[vars]
+JWT_SECRET = "013ce3958eda752fdb679e1b1cc5e1d6ab94722d74bdd46e9d9abf5a5e0684bfd33c3f26c1ec5cfa6096add827c207804722131078605d0b80394636dbb16b42"

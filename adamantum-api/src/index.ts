@@ -3,6 +3,7 @@ import {Router} from "./core/router/router";
 
 export interface Env {
 	'adamantumDb': D1Database;
+	JWT_SECRET: string;
 }
 
 export default {

@@ -5,6 +5,7 @@ export interface UserBase extends BaseBody {
     userLogin: string;
     userPassword: string;
     userName: string;
+    jwt?: string;
 }
 export interface User extends Omit<UserBase, 'userPassword'> {}
 export interface UserRegister extends Omit<UserBase, 'userId'> {}
