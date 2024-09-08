@@ -9,7 +9,7 @@ import {AuthGuard} from "./guards/auth.guard";
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [AuthService, AuthGuard]
+  providers: []
 })
 export class AppComponent {
   title = 'admin';
