@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {User, UserLogin} from "api-types";
 import {BehaviorSubject, map, Observable, shareReplay} from "rxjs";
-import {ApiService} from "../api/api.service";
+import {ApiService} from "./api.service";
 import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private apiService: ApiService, private _router: Router) {
   }
   public login(user: UserLogin): void{
-    this.apiService.login(user).subscribe(user => {
+    this.apiService.login$(user).subscribe(user => {
       if(!!user) {
         this._userSubject.next(user);
         this._router.navigate(['main'])

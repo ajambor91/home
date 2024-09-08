@@ -1,5 +1,7 @@
 <div>
   <h1>works</h1>
 
-  {{posts$ | json}}
+  {{posts$ | async| json}}
+
+  <app-posts-add></app-posts-add>
 </div>

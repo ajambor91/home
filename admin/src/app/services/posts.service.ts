@@ -1,14 +1,18 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {Posts} from "api-types";
-import {PostsApi} from "api-lib";
+import {Observable, take} from "rxjs";
+import {NewPost, Posts} from "api-types";
+import {ApiService} from "./api.service";
 
 @Injectable()
-class PostsService {
-  constructor(private _api: PostsApi) {
+export class PostsService {
+  constructor(private _api: ApiService) {
   }
 
   public getPosts$(): Observable<Posts> {
-    return this._api.getPost();
+    return this._api.getPosts$().pipe(take(1));
+  }
+
+  public addPost(post: NewPost): void {
+    this._api.addPost$(post).subscribe()
   }
 }

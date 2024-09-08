@@ -37,3 +37,4 @@ Dockerfile
 *.log
 *.tmp
 *.temp
+workspace/

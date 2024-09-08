@@ -1,29 +1,21 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {map, Observable, withLatestFrom} from "rxjs";
+import {HttpHandlerFn, HttpRequest} from "@angular/common/http";
 import {AuthService} from "../services/auth.service";
-import {Injectable} from "@angular/core";
-@Injectable({providedIn: 'root'})
-export class AuthInterceptor implements HttpInterceptor {
-  private readonly _unguardedRoutes: string[] = [
-    '/api/posts',
-    '/api/users/add'
-  ];
-  constructor(private authService: AuthService) {
-  }
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      withLatestFrom(this.authService.getCurrentUser()),
-      map(([handler, user]) => {
-        let newRequest: HttpRequest<any> = req;
-        if (user && !!user.jwt) {
-          newRequest.clone({
-            setHeaders: {
-              Authorization: `Bearer ${user.jwt}`
-            }
-          })
-        }
-        return next.handle(newRequest);
-      })
-    )
-  }
+import {inject} from "@angular/core";
+import {switchMap, take} from "rxjs";
+
+export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
+  const authService: AuthService = inject(AuthService);
+  return authService.getCurrentUser().pipe(
+    take(1),
+    switchMap(user => {
+      if (!user || !user.jwt) {
+        return next(req)
+      }
+      const newReq = req.clone({
+        headers: req.headers.append('Authorization', user?.jwt as string),
+      });
+      return next(newReq);
+    })
+  )
+
 }

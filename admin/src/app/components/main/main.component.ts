@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {AuthService} from "../../services/auth.service";
 import {Posts, User} from "api-types";
 import {Observable} from "rxjs";
 import {PostsListComponent} from "./posts-list/posts-list.component";
-import {PostsApi} from 'api-lib/src/posts/posts.api';
+import {PostsService} from "../../services/posts.service";
+
 @Component({
   selector: 'app-main',
   standalone: true,
+  providers: [PostsService],
   imports: [RouterOutlet, PostsListComponent],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  styleUrl: './main.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent {
 
-  public get posts$(): Observable<Posts> {
-    return this._postsService.getPost();
-  }
-  public get user$(): Observable<User> {
-    return this._authService.getCurrentUser() as Observable<User>;
-  }
+  public posts$: Observable<Posts> = this._postsService.getPosts$();
+  public user$: Observable<User> = this._authService.getCurrentUser() as Observable<User>;
 
-  constructor(private _authService: AuthService, private _postsService: PostsApi) {
+  constructor(private _authService: AuthService, private _postsService: PostsService) {
   }
 }
