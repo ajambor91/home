@@ -15,11 +15,14 @@ export class Router {
             let body: BaseBody | null = null;
             if (currentRoute !== undefined) {
                 if (currentRoute.middleware) {
+                    console.log('$$$$$$$$$$$$$$$')
+                    console.log(this._req.body)
                     try {
                         body = await currentRoute.middleware(this._req);
 
 
                     } catch (middlewareError) {
+                        console.log(middlewareError)
                         return createResponse(BAD_REQUEST_RESPONSE);
                     }
                 }
