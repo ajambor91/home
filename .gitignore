@@ -9,10 +9,12 @@ yarn.lock
 # Output directories
 dist/
 build/
+coverage/
 
 # IDE specific files
 .vscode/
 .idea/
+.sublime/
 
 # Wrangler (Cloudflare Workers specific)
 .wrangler/
