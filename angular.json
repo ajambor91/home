@@ -197,6 +197,39 @@
           }
         }
       }
+    },
+    "adamantum-api-reqs": {
+      "projectType": "library",
+      "root": "projects/adamantum-api-reqs",
+      "sourceRoot": "projects/adamantum-api-reqs/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/adamantum-api-reqs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/adamantum-api-reqs/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/adamantum-api-reqs/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/adamantum-api-reqs/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

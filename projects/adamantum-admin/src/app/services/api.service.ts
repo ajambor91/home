@@ -15,10 +15,6 @@ export class ApiService {
     return this.httpClient.post(`${this._apiUrl}users/login`, user);
   }
 
-  public getPosts$(): Observable<Posts> {
-    return this.httpClient.get<Posts>(`${this._apiUrl}posts`)
-  }
-
   public addPost$(post: NewPost): Observable<void> {
     return this.httpClient.post<void>(`${this._apiUrl}post`,post)
   }

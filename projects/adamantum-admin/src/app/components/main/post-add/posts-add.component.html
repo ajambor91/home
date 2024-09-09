@@ -1,5 +1,13 @@
-<form (submit)="onSubmit()" [formGroup]="loginForm">
-  <input  type="text" class="form-control" formControlName="postTitle"/>
-  <input  type="text" class="form-control" formControlName="postContent"/>
-  <button type="submit">Loguj</button>
+<form (submit)="onSubmit()" [formGroup]="loginForm" class="p-3">
+  <div class="mb-3">
+    <label for="post-title" class="form-label">Tytuł postu</label>
+    <input id="post-title" type="text" class="form-control" formControlName="postTitle" placeholder="Wpisz tytuł">
+  </div>
+
+  <div class="mb-3">
+    <label for="post-content" class="form-label">Treść postu</label>
+    <textarea id="post-content" class="form-control" formControlName="postContent" rows="4" placeholder="Wpisz treść"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Dodaj post</button>
 </form>

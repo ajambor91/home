@@ -5,12 +5,13 @@ import {Posts, User} from "shared-types";
 import {Observable} from "rxjs";
 import {PostsListComponent} from "./posts-list/posts-list.component";
 import {PostsService} from "../../services/posts.service";
+import {SideNavComponent} from "./side-nav/side-nav.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
   providers: [PostsService],
-  imports: [RouterOutlet, PostsListComponent],
+  imports: [RouterOutlet, PostsListComponent, SideNavComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

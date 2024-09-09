@@ -28,6 +28,7 @@
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "shared-types": "file:./projects/adamantum-shared-types",
+    "adamantum-api-reqs": "file: ./dist/adamantum-api-reqs",
     "tslib": "^2.3.0",
     "typed.js": "^2.1.0",
     "zone.js": "~0.14.3"
@@ -47,6 +48,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^18.2.0",
     "typescript": "~5.4.2"
   }
 }

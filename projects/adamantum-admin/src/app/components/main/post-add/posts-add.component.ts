@@ -13,6 +13,7 @@ import {PostsService} from "../../../services/posts.service";
   imports: [RouterOutlet, JsonPipe, AsyncPipe, FormsModule, ReactiveFormsModule],
   templateUrl: './posts-add.component.html',
   styleUrl: './posts-add.component.scss',
+  providers: [PostsService],
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })

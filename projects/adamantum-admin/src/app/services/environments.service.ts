@@ -9,5 +9,9 @@ export class EnvironmentsService {
     return this.environment.apiUrl;
   }
 
+  public get appDataKey(): string {
+    return this.environment.appDataKey;
+  }
+
 
 }

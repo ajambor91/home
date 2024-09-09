@@ -3,6 +3,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "adamantum-api-reqs": [
+        "./dist/adamantum-api-reqs"
+      ],
+      "api-reqs": [
+        "./dist/api-reqs"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

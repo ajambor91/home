@@ -1,7 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-xs-12">
-      <app-posts-list [posts$]="posts$"></app-posts-list>
+<div class="container-fluid min-vh-100">
+  <!-- Top bar -->
+  <header class="bg-dark text-white py-3 mb-4">
+    <div class="container">
+      <h1 class="m-0">Adamantum Admin</h1>
     </div>
+  </header>
+
+  <div class="row">
+    <div class="col-md-3 col-lg-2">
+      <app-side-nav></app-side-nav>
+    </div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
   </div>
 </div>

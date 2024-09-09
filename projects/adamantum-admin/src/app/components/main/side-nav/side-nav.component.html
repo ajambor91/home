@@ -1,0 +1,30 @@
+<nav id="sidebar" class=" d-md-block bg-light sidebar collapse min-vh-100">
+  <h2 class=" text-center">MENU</h2>
+  <div class="position-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/">
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" (click)="togglePosts()">Posty</span>
+        <ng-container *ngIf="isPostsOpened">
+          <ul class="nav flex-column ms-3">
+            <li><a routerLink="/add-post" class="nav-link">Dodaj</a></li>
+            <li><a routerLink="/posts-list" class="nav-link">Lista</a></li>
+          </ul>
+        </ng-container>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" (click)="toggleCategories()">Kategorie</span>
+        <ng-container *ngIf="isCategoriesOpened">
+          <ul class="nav flex-column ms-3">
+            <li><a routerLink="/add-category" class="nav-link">Dodaj</a></li>
+            <li><a routerLink="/categories-list" class="nav-link">Lista</a></li>
+          </ul>
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+</nav>
