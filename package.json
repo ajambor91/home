@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:portfolio": "node dist/portfolio/server/server.mjs"
+    "serve:ssr:portfolio": "node dist/portfolio/server/server.mjs",
+    "frontend-app": "concurrently \"ng serve adamantum-home --port 4200\" \"ng serve adamantum-admin --port 4201\""
   },
   "private": true,
   "dependencies": {
@@ -18,33 +19,34 @@
     "@angular/forms": "^18.0.0",
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
+    "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@angular/ssr": "^18.0.7",
     "@ng-bootstrap/ng-bootstrap": "^17.0.1",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.14.3",
-    "shared-types": "file:./projects/adamantum-shared-types",
-    "@angular/platform-server": "^18.0.0",
-    "@angular/ssr": "^18.0.7",
     "express": "^4.18.2",
-    "typed.js": "^2.1.0"
+    "rxjs": "~7.8.0",
+    "shared-types": "file:./projects/adamantum-shared-types",
+    "tslib": "^2.3.0",
+    "typed.js": "^2.1.0",
+    "zone.js": "~0.14.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.3",
     "@angular/cli": "^18.0.7",
     "@angular/compiler-cli": "^18.0.0",
     "@angular/localize": "^18.0.0",
+    "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "concurrently": "^9.0.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2",
-    "@types/express": "^4.17.17",
-    "@types/node": "^18.18.0"
+    "typescript": "~5.4.2"
   }
 }

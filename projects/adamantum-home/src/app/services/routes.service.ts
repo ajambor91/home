@@ -5,7 +5,7 @@ import {map, Observable, shareReplay} from "rxjs";
 import {IRouteEx, IRoutesEx, ITreeNodeRoutes} from "../models/route.model";
 import {IApiRoutes} from "../models/api.model";
 import {GenericPostComponent} from "../components/main-page/generic-post/generic-post.component";
-import {PostRoute, PostsRoutes} from "api-types";
+import {PostRoute, PostsRoutes} from "shared-types";
 
 @Injectable()
 export class RoutesService {

@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IApiRoutes} from "../models/api.model";
 import {EnvironmentsService} from "./environments.service";
-import {Posts, PostsRoutes} from "api-types";
+import {Posts, PostsRoutes} from "shared-types";
 
 @Injectable()
 export class ApiService {
