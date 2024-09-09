@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <ng-container *ngFor="let conf of tableConfig">
+          <th>{{conf.colTitle}}</th>
+      </ng-container>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let tableDatum of tableData">
+      <tr>
+        <ng-container *ngFor="let conf of tableConfig">
+          <ng-container [ngSwitch]="conf.actionTemplate">
+            <ng-container *ngSwitchCase="'basic'">
+              <td>{{tableDatum[conf.fieldName]}}</td>
+            </ng-container>
+            <ng-container *ngSwitchCase="'button'">
+              <button (click)="runAction(conf.action, tableDatum)">{{conf.actionName}}</button>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+      </tr>
+    </ng-container>
+
+    </tbody>
+  </table>
+

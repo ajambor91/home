@@ -8,16 +8,16 @@ import {AsyncPipe, JsonPipe} from "@angular/common";
 import {PostsService} from "../../../services/posts.service";
 
 @Component({
-  selector: 'app-posts-add',
+  selector: 'app-post-form',
   standalone: true,
   imports: [RouterOutlet, JsonPipe, AsyncPipe, FormsModule, ReactiveFormsModule],
-  templateUrl: './posts-add.component.html',
-  styleUrl: './posts-add.component.scss',
+  templateUrl: './post-form.component.html',
+  styleUrl: './post-form.component.scss',
   providers: [PostsService],
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class PostsAddComponent {
+export class PostFormComponent {
   public readonly loginForm: FormGroup<PostNewForm> = postNewForm();
 
   constructor(private _postService: PostsService) {

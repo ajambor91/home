@@ -1,39 +1,19 @@
 <div class="container mt-4">
   <h2 class="mb-3">Lista postów</h2>
 
-  <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>Tytuł</th>
-      <th>Kategoria</th>
-      <th>Akcje</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let post of posts$ | async">
-      <td>{{ post.postId }}</td>
-      <td>{{ post.postTitle }}</td>
-      <td>{{ post.category }}</td>
-      <td>
-        <button class="btn btn-primary btn-sm me-2" (click)="editPost(post)">Edytuj</button>
-        <button class="btn btn-danger btn-sm" (click)="deletePost(post.postId)">Usuń</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <app-table [tableConfig]="tableConfig" [tableData]="posts$ | async" (action)="runAction($event)"></app-table>
 
-  <nav>
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="currentPage === 1">
-        <a class="page-link" (click)="previousPage()">Poprzednia</a>
-      </li>
-      <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
-        <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
-      </li>
-      <li class="page-item" [class.disabled]="currentPage === totalPages">
-        <a class="page-link" (click)="nextPage()">Następna</a>
-      </li>
-    </ul>
-  </nav>
+<!--  <nav>-->
+<!--    <ul class="pagination justify-content-center">-->
+<!--      <li class="page-item" [class.disabled]="currentPage === 1">-->
+<!--        <a class="page-link" (click)="previousPage()">Poprzednia</a>-->
+<!--      </li>-->
+<!--      <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">-->
+<!--        <a class="page-link" (click)="goToPage(page)">{{ page }}</a>-->
+<!--      </li>-->
+<!--      <li class="page-item" [class.disabled]="currentPage === totalPages">-->
+<!--        <a class="page-link" (click)="nextPage()">Następna</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </nav>-->
 </div>
