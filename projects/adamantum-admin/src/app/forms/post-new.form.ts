@@ -1,5 +1,5 @@
 import {FormGroupFrom} from "../core/generic.types";
-import {NewPost} from "api-types";
+import {NewPost} from "shared-types";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 export type PostNewForm = FormGroupFrom<NewPost>

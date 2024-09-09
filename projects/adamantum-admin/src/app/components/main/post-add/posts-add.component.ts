@@ -1,6 +1,6 @@
 
 import {PostNewForm, postNewForm} from "../../../forms/post-new.form";
-import {NewPost} from "api-types";
+import {NewPost} from "shared-types";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ChangeDetectionStrategy, Component} from "@angular/core";
 import {RouterOutlet} from "@angular/router";

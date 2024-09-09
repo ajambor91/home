@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {Posts, User} from "api-types";
+import {Posts, User} from "shared-types";
 import {Observable} from "rxjs";
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {PostsAddComponent} from "../post-add/posts-add.component";

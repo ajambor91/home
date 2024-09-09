@@ -3,7 +3,7 @@ import {NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { IUserLoginForm, loginForm} from "../../forms/login.form";
 import {AuthService} from "../../services/auth.service";
-import {UserLogin} from "api-types";
+import {UserLogin} from "shared-types";
 
 @Component({
   selector: 'app-login',

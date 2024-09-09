@@ -2,7 +2,7 @@ import {inject, Injectable} from "@angular/core";
 import {EnvironmentsService} from "./environments.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {NewPost, Posts, UserLogin} from "api-types";
+import {NewPost, Posts, UserLogin} from "shared-types";
 
 
 @Injectable({providedIn: 'root'})

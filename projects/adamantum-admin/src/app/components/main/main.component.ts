@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {AuthService} from "../../services/auth.service";
-import {Posts, User} from "api-types";
+import {Posts, User} from "shared-types";
 import {Observable} from "rxjs";
 import {PostsListComponent} from "./posts-list/posts-list.component";
 import {PostsService} from "../../services/posts.service";

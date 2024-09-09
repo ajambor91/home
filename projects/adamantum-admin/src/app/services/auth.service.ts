@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {User, UserLogin} from "api-types";
+import {User, UserLogin} from "shared-types";
 import {BehaviorSubject, map, Observable, shareReplay} from "rxjs";
 import {ApiService} from "./api.service";
 import {Router} from "@angular/router";

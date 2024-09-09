@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, take} from "rxjs";
-import {NewPost, Posts} from "api-types";
+import {NewPost, Posts} from "shared-types";
 import {ApiService} from "./api.service";
 
 @Injectable()
