@@ -7,7 +7,7 @@ export const postNewForm: () => FormGroup = () => {
   return new FormGroup<PostNewForm>({
     postContent: new FormControl<string>('', [Validators.required]),
     postTitle: new FormControl<string>('',[Validators.required]),
-    category: new FormControl<string>(''),
+    categoryId: new FormControl<number>(0),
     fullPath: new FormControl<string>('')
   })
 }

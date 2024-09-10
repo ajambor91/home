@@ -9,4 +9,4 @@ export interface UserBase extends BaseBody {
 }
 export interface User extends Omit<UserBase, 'userPassword'> {}
 export interface UserRegister extends Omit<UserBase, 'userId'> {}
-export interface UserLogin extends Pick<UserBase, 'userLogin' , 'userPassword'> {}
+export interface UserLogin extends Pick<UserBase, 'userLogin' | 'userPassword'> {}

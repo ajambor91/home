@@ -29,7 +29,7 @@ export class PostFormComponent {
       postTitle: 'Text',
       postContent: 'xxx',
       fullPath: 'test',
-      category: 'category'
+      categoryId: 2
     }
     this._postService.addPost(newPostTMP);
   }}

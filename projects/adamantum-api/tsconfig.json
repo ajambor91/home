@@ -17,6 +17,7 @@
 		"allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
 		"strict": true /* Enable all strict type-checking options. */,
 		"noUncheckedIndexedAccess": true,
-		"skipLibCheck": true /* Skip type checking all .d.ts files. */
+		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "experimentalDecorators": true
 	}
 }

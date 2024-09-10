@@ -1,6 +1,12 @@
 import {HttpMethod, RouteRaw} from "./core/router/types";
 import {Router} from "./core/router/router";
+import {PostRepository} from "./repositories/post.repository";
+import {PostEntity} from "./entities/post.entity";
+import {DependencyContainer} from "./core/classes/dependency-container.class";
+const container = DependencyContainer.getInstance();
 
+container.registerFactory('PostRepository', PostRepository);
+container.registerFactory('PostEntity', PostEntity);
 export interface Env {
 	'adamantumDb': D1Database;
 	JWT_SECRET: string;

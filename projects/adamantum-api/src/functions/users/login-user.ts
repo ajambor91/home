@@ -1,5 +1,5 @@
 import { HttpRequest } from "../../core/router/types";
-import { UserBase, UserLogin, User} from "api-types";
+import { UserBase, UserLogin, User} from "shared-types";
 import {createResponse, generateJWT, hashPassword} from "../../core/help_functions/functions";
 import {INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE} from "../../core/router/default-responses";
 import {OK_CODE} from "../../core/router/http-statuses";

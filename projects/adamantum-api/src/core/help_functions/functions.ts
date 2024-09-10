@@ -1,6 +1,9 @@
 import {HttpRequest, HttpResponse} from "../router/types";
 import {Env} from "../../index";
 import {BaseBody} from "../middleware/jsonify";
+import {RepoClass} from "../abstract/repo.abstract";
+import {EntityClass} from "../abstract/entity.abstract";
+import {DependencyContainer} from "../classes/dependency-container.class";
 
 export const createResponse: (httpResponse: HttpResponse) => Response = (httpResponse: HttpResponse): Response => {
     return new Response(JSON.stringify(httpResponse.body), {
@@ -99,3 +102,15 @@ export const verifyJWT: (token: string, secret: string) => Promise<boolean> = as
     const isValid = await crypto.subtle.verify('HMAC', key, signatureArray, encoder.encode(data));
     return isValid;
 };
+
+export const getRepository = <T extends RepoClass>(cls: new (...args: any[]) => T, ...params: any[]): T => {
+  const container: DependencyContainer = DependencyContainer.getInstance();
+  return container.resolve<T>(cls.name, ...params);
+};
+
+export const getEntity = <T extends EntityClass>(cls: new (...args: any[]) => T, ...params: any[]): T => {
+  const container: DependencyContainer = DependencyContainer.getInstance();
+  return container.resolve<T>(cls.name, ...params);
+};
+
+

@@ -21,7 +21,7 @@ export class Router {
             let body: BaseBody | null = null;
             if (currentRoute !== undefined) {
                 if (currentRoute.middleware) {
-                    console.log('$$$$$$$$$$$$$$$')
+                    console.log('$$$$$$$$$$$$$$$', currentRoute.middleware)
                     console.log(this._req.body)
                     try {
                         body = await currentRoute.middleware(this._req);
