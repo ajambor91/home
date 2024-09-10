@@ -1,0 +1,14 @@
+<form (submit)="onSubmit()" [formGroup]="categoryForm" class="p-3">
+  <div class="mb-3">
+    <label for="post-title" class="form-label">Nazwa kategorii</label>
+    <input id="post-title" type="text" class="form-control" formControlName="categoryName" placeholder="Wpisz nazwę">
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form-label">Kategoria</label>
+    <select id="category" class="form-select" formControlName="categoryParent">
+      <option value="" disabled selected>Wybierz kategorię</option>
+      <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Dodaj post</button>
+</form>

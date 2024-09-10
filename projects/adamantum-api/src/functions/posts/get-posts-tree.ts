@@ -7,10 +7,11 @@ import {PostRepository} from "../../repositories/post.repository";
 import {PostEntity} from "../../entities/post.entity";
 
 
-export const getPosts = async (request: HttpRequest<void>): Promise<Response> => {
+export const getPostsTree= async (request: HttpRequest<void>): Promise<Response> => {
   try {
     const postRepository: PostRepository = getRepository(PostRepository, request.env);
-    const result: PostEntity[] = await postRepository.getAll();
+    const result: PostEntity[] = await postRepository.getPostsList();
+    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', result)
     return createResponse({ body: result, code: OK_CODE });
   } catch (e) {
     console.error(e)

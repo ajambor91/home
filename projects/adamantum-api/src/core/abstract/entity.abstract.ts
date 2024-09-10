@@ -2,8 +2,7 @@ import {BaseBody} from "../middleware/jsonify";
 
 export abstract class EntityClass {
   [key: string]: any;
-  constructor(data: BaseBody | EntityClass) {
-    this.map<EntityClass>(data);
+  constructor() {
     this.setCreatedAt();
   }
   protected setCreatedAt(): void {
@@ -11,8 +10,4 @@ export abstract class EntityClass {
       this['createdAt'] = new Date();
     }
   }
-  protected map<T>(data: Partial<T>): void {
-    Object.assign(this, data);
-  }
-
 }

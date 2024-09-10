@@ -1,45 +1,42 @@
-import {EntityClass} from "../core/abstract/entity.abstract";
-import {required} from "../core/decorators/entity.decorator";
-import {PostTypes} from "shared-types";
-export  class UserEntity extends EntityClass {
-  postId?: number;
+import { EntityClass } from "../core/abstract/entity.abstract";
+import { required } from "../core/decorators/entity.decorator";
+import {UserDTO} from "../data-transfer-objects/user.dto";
+
+export class UserEntity extends EntityClass {
+  userId?: number | null;
   @required
-  postTitle?: string;
+  userName?: string;
   @required
-  postContent?: string;
-  fullPath?: string;
-  categoryId?: number;
+  userLogin?: string;
+  userPassword?: string;
   @required
   createdAt?: Date;
-  deletedAt?: Date;
-
-  constructor(post: PostTypes) {
-    super(post);
-
+  constructor(dto: UserDTO) {
+    super();
+    this.userId = dto.userId ?? 0;
+    this.userLogin = dto.userLogin;
+    this.userPassword = dto.userPassword;
+    this.userName = dto.userName;
+    this.createdAt = dto.createdAt ? new Date(dto.createdAt) : new Date();
   }
 
-  public setPostId(postId: number): this {
-    this.postId = postId;
+  public setUserId(userId: number): this {
+    this.userId = userId;
     return this;
   }
 
-  public setPostTitle(postTitle: string): this {
-    this.postTitle = postTitle;
+  public setUserName(userName: string): this {
+    this.userName = userName;
     return this;
   }
 
-  public setPostContent(postContent: string): this {
-    this.postContent = postContent;
+  public setUserLogin(userLogin: string): this {
+    this.userLogin = userLogin;
     return this;
   }
 
-  public setFullPath(fullPath: string): this {
-    this.fullPath = fullPath;
-    return this;
-  }
-
-  public setCategoryId(categoryId?: number): this {
-    this.categoryId = categoryId;
+  public setUserPassword(userPassword: string): this {
+    this.userPassword = userPassword;
     return this;
   }
 
@@ -54,6 +51,4 @@ export  class UserEntity extends EntityClass {
     this.deletedAt = deletedAt;
     return this;
   }
-
 }
-

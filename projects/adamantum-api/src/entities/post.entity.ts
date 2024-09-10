@@ -1,21 +1,31 @@
 import {EntityClass} from "../core/abstract/entity.abstract";
 import {required} from "../core/decorators/entity.decorator";
-import {PostTypes} from "shared-types";
+import {PostDTO} from "../data-transfer-objects/post.dto";
 export  class PostEntity extends EntityClass {
-  postId?: number;
+  postId?: number | null;
   @required
   postTitle?: string;
   @required
   postContent?: string;
   fullPath?: string;
-  categoryId?: number;
+  categoryId?: number | null;
   @required
   createdAt?: Date;
-  deletedAt?: Date;
-
-  constructor(post: PostTypes) {
-    super(post);
-
+  deletedAt?: Date | null;
+  categoryName?: string | null;
+  parentCategoryName?: string | null;
+  constructor(dto: PostDTO) {
+    super();
+    this.postId = dto.postId;
+    this.postTitle = dto.postTitle;
+    this.postContent = dto.postContent;
+    this.fullPath = dto.fullPath;
+    this.categoryId = dto.categoryId;
+    this.categoryName = dto.categoryName;
+    this.categoryId = dto.categoryId;
+    this.parentCategoryName = dto.parentCategoryName;
+    this.createdAt = dto.createdAt;
+    this.deletedAt = dto.deletedAt;
   }
 
   public setPostId(postId: number): this {

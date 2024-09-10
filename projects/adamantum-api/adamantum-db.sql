@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS posts (
                                    postContent TEXT,
                                    fullPath TEXT,
                                    categoryId INTEGER,
-                                   createdAt TEXT NOT NULL,
-                                   deletedAt TEXT,
+                                   createdAt INTEGER NOT NULL,
+                                   deletedAt INTEGER,
                                    FOREIGN KEY (categoryId) REFERENCES categories(categoryId) ON DELETE CASCADE
   );
 
@@ -13,7 +13,9 @@ CREATE TABLE IF NOT EXISTS users (
                                    userId INTEGER PRIMARY KEY AUTOINCREMENT,
                                    userName TEXT NOT NULL,
                                    userLogin TEXT UNIQUE NOT NULL,
-                                   userPassword TEXT NOT NULL
+                                   userPassword TEXT NOT NULL,
+                                   createdAt INTEGER NOT NULL,
+                                   deletedAt TEXT
 );
 
 CREATE TABLE IF NOT EXISTS categories (

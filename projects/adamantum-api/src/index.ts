@@ -3,10 +3,21 @@ import {Router} from "./core/router/router";
 import {PostRepository} from "./repositories/post.repository";
 import {PostEntity} from "./entities/post.entity";
 import {DependencyContainer} from "./core/classes/dependency-container.class";
+import {CategoryRepository} from "./repositories/category.repository";
+import {UserRepository} from "./repositories/user.repository";
+
+import {UserEntity} from "./entities/user.entity";
+import {CategoryEntity} from "./entities/category.entity";
 const container = DependencyContainer.getInstance();
 
 container.registerFactory('PostRepository', PostRepository);
 container.registerFactory('PostEntity', PostEntity);
+container.registerFactory('CategoryRepository', CategoryRepository);
+container.registerFactory('CategoryEntity', CategoryEntity);
+container.registerFactory('UserRepository', UserRepository);
+container.registerFactory('UserEntity', UserEntity);
+
+
 export interface Env {
 	'adamantumDb': D1Database;
 	JWT_SECRET: string;

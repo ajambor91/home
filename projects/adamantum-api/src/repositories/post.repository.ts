@@ -1,8 +1,9 @@
-
 import {PostEntity} from "../entities/post.entity";
 import {Env} from "../index";
 import {RepoClass} from "../core/abstract/repo.abstract";
 import {ADD_POST, DELETE_POST, GET_POST_BY_ID, GET_POSTS_LIST, SELECT_ALL_POSTS, UPDATE_POST} from "../db/posts.sql";
+import {getTimestamp} from "../core/help_functions/functions";
+import {getPostFactory, PostFactoryTypes} from "../core/factories/post.factory";
 
 export class PostRepository extends RepoClass {
   constructor(private env: Env) {
@@ -10,16 +11,16 @@ export class PostRepository extends RepoClass {
   }
   public async getAll(): Promise<PostEntity[]> {
     const { results}: any = await this.env.adamantumDb.prepare(SELECT_ALL_POSTS).all();
-    return results as PostEntity[];
+    return getPostFactory(PostFactoryTypes.LIST_BASIC_POSTS).createManyPosts(results);
   }
 
   public async getById(id: number): Promise<PostEntity> {
     const result: any = await this.env.adamantumDb.prepare(GET_POST_BY_ID).bind(id).first();
-    return result as PostEntity;
+    return getPostFactory(PostFactoryTypes.POST_VIEW_DETAILS).createPost(result);
   }
 
   public async softDeleteById(id: number): Promise<void> {
-    await this.env.adamantumDb.prepare(DELETE_POST).bind(id).run();
+    await this.env.adamantumDb.prepare(DELETE_POST).bind(getTimestamp(new Date()), id).run();
   }
 
   public async updateById(entity: PostEntity): Promise<void> {
@@ -28,10 +29,12 @@ export class PostRepository extends RepoClass {
   }
 
   public async addNew(entity: PostEntity): Promise<void> {
-    await this.env.adamantumDb.prepare(ADD_POST).bind(entity.postTitle, entity.postContent, entity.fullPath, entity.categoryId, entity.categoryId).run();
+    await this.env.adamantumDb.prepare(ADD_POST).bind(entity.postTitle, entity.postContent, entity.fullPath, entity.categoryId, getTimestamp(entity.createdAt)).run();
   }
 
   public async getPostsList(): Promise<any> {
-    return this.env.adamantumDb.prepare(GET_POSTS_LIST).all();
+    const {results}: any = await this.env.adamantumDb.prepare(GET_POSTS_LIST).all();
+    console.log('rrrrrresssssultsss', results)
+    return getPostFactory(PostFactoryTypes.TREE_NODE_POSTS).createManyPosts(results)
   }
 }

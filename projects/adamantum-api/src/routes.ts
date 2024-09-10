@@ -6,6 +6,9 @@ import {getPostsRoutes} from "./functions/posts/get-posts-routes";
 import {loginUser} from "./functions/users/login-user";
 import {addUser} from "./functions/users/add-user";
 import {authGuard} from "./core/guards/auth.guard";
+import {getPostsTree} from "./functions/posts/get-posts-tree";
+import {addCategory} from "./functions/categories/add-category";
+import {getCategories} from "./functions/categories/get-categories";
 
 export const routes: Routes = [
     {
@@ -25,6 +28,12 @@ export const routes: Routes = [
         middleware: jsonify,
         guard: authGuard
     },
+  {
+    pathname: '/api/posts-tree',
+    method: 'GET',
+    function: getPostsTree,
+    middleware: jsonify,
+  },
     {
         pathname: '/api/users/login',
         method: 'POST',
@@ -36,5 +45,18 @@ export const routes: Routes = [
         method: 'POST',
         function: addUser,
         middleware: jsonify
-    }
+    },
+  {
+    pathname: '/api/categories/add',
+    method: 'POST',
+    function: addCategory,
+    middleware: jsonify,
+    guard: authGuard
+
+  },
+  {
+    pathname: '/api/categories',
+    method: 'GET',
+    function: getCategories
+  },
 ]

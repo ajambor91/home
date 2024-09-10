@@ -2,7 +2,7 @@ import {inject, Injectable} from "@angular/core";
 import {EnvironmentsService} from "./environments.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {NewPost, Posts, UserLogin} from "shared-types";
+import {CategoryForm, NewPost, Posts, UserLogin} from "shared-types";
 
 
 @Injectable({providedIn: 'root'})
@@ -17,5 +17,14 @@ export class ApiService {
 
   public addPost$(post: NewPost): Observable<void> {
     return this.httpClient.post<void>(`${this._apiUrl}post`,post)
+  }
+
+  public addCategory$(category: CategoryForm): Observable<void> {
+    return this.httpClient.post<void>(`${this._apiUrl}categories/add`,category)
+
+  }
+
+  public getCategories$(): Observable<any> {
+    return this.httpClient.get(`${this._apiUrl}categories`)
   }
 }
