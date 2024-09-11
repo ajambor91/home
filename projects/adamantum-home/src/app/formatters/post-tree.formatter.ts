@@ -7,6 +7,7 @@ import {IFormatInterface} from "../core/formatter.interfaces";
   providedIn: 'root'
 })
 export class PostsFormatter implements ISupportInterface<any>, IFormatInterface<string, string> {
+
   format(item: string): string {
     return 'ss';
   }
