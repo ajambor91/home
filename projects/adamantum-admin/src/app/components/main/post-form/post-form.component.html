@@ -1,4 +1,5 @@
-<form (submit)="onSubmit()" [formGroup]="loginForm" class="p-3">
+<ng-container *ngIf="postForm">
+<form (submit)="onSubmit()" [formGroup]="postForm" class="p-3">
   <div class="mb-3">
     <label for="post-title" class="form-label">Tytuł postu</label>
     <input id="post-title" type="text" class="form-control" formControlName="postTitle" placeholder="Wpisz tytuł">
@@ -8,8 +9,6 @@
     <label for="post-content" class="form-label">Treść postu</label>
     <textarea id="post-content" class="form-control" formControlName="postContent" rows="4" placeholder="Wpisz treść"></textarea>
   </div>
-
-  <!-- Select dropdown for category -->
   <div class="mb-3">
     <label for="category" class="form-label">Kategoria</label>
     <select id="category" class="form-select" formControlName="categoryId">
@@ -20,3 +19,4 @@
 
   <button type="submit" class="btn btn-primary">Dodaj post</button>
 </form>
+</ng-container>

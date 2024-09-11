@@ -8,7 +8,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <span class="nav-link" (click)="togglePosts()">Posty</span>
+        <span class="nav-link" routerLink="/posts-list" (click)="togglePosts()">Posty</span>
         <ng-container *ngIf="isPostsOpened">
           <ul class="nav flex-column ms-3">
             <li><a routerLink="/add-post" class="nav-link">Dodaj</a></li>
@@ -17,7 +17,7 @@
         </ng-container>
       </li>
       <li class="nav-item">
-        <span class="nav-link" (click)="toggleCategories()">Kategorie</span>
+        <span class="nav-link"  routerLink="/categories-list" (click)="toggleCategories()">Kategorie</span>
         <ng-container *ngIf="isCategoriesOpened">
           <ul class="nav flex-column ms-3">
             <li><a routerLink="/add-category" class="nav-link">Dodaj</a></li>

@@ -1,8 +1,9 @@
-import {UserBase} from "shared-types";
 import {UserEntity} from "../entities/user.entity";
-import {UserTypes, UserDB} from 'shared-types';
-export interface UserDTO extends Partial<UserDB>{
+import {UserDB, UserTypes} from 'shared-types';
+
+export interface UserDTO extends Partial<UserDB> {
 }
+
 export const mapUserDTOToEntity = (dto: UserTypes): UserEntity => {
   const userId: number | null = 'userId' in dto ? dto.userId : null
   const userName: string | undefined = 'userName' in dto ? dto.userName : undefined;

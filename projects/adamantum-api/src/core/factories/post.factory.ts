@@ -1,14 +1,17 @@
 import {PostEntity} from "../../entities/post.entity";
+
 abstract class PostFactory {
   public createPost(data: any): PostEntity {
     return this.create(data)
   }
+
   public createManyPosts(data: any[]): PostEntity[] {
     return data.map(item => this.create(item))
   }
 
-  protected abstract create(data:any): PostEntity;
+  protected abstract create(data: any): PostEntity;
 }
+
 export class BasicPostFactory extends PostFactory {
   protected create(data: any): PostEntity {
     return new PostEntity({
@@ -20,6 +23,7 @@ export class BasicPostFactory extends PostFactory {
     });
   }
 }
+
 export class PostViewDetailsFactory extends PostFactory {
 
   protected create(data: any): PostEntity {
@@ -34,7 +38,6 @@ export class PostViewDetailsFactory extends PostFactory {
 
 export class FullPostFactory extends PostFactory {
   protected create(data: any): PostEntity {
-    console.log('dadadadada',data)
     return new PostEntity({
       postId: data.postId,
       postTitle: data.postTitle,
@@ -54,9 +57,8 @@ export enum PostFactoryTypes {
   POST_VIEW_DETAILS = 'POST_VIEW_DETAILS'
 }
 
-export const getPostFactory: (postType: PostFactoryTypes) => PostFactory = (postType: PostFactoryTypes) =>  {
+export const getPostFactory: (postType: PostFactoryTypes) => PostFactory = (postType: PostFactoryTypes) => {
   let postFactory: PostFactory;
-  console.log('dddddupa')
   switch (postType) {
     case PostFactoryTypes.LIST_BASIC_POSTS:
       postFactory = new BasicPostFactory();

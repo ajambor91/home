@@ -1,9 +1,11 @@
-import { PostTypes } from "shared-types";
-import { PostEntity } from "../entities/post.entity";
-import { PostDB} from 'shared-types';
-export interface PostDTO extends Partial<PostDB> {}
+import {PostDB, PostTypes} from "shared-types";
+import {PostEntity} from "../entities/post.entity";
+
+export interface PostDTO extends Partial<PostDB> {
+}
+
 export const mapPostDTOToEntity = (dto: PostTypes): PostEntity => {
-  const postId: number | null = 'postId' in dto  && typeof dto.postId !== 'undefined' ? dto.postId : null;
+  const postId: number | null = 'postId' in dto && typeof dto.postId !== 'undefined' ? dto.postId : null;
   const createdAt: Date = 'createdAt' in dto && typeof dto.createdAt === 'number' ? new Date(dto.createdAt) : new Date();
   const deletedAt: Date | null = 'deletedAt' in dto ? (dto.deletedAt ? new Date(dto.deletedAt) : null) : null;
   const categoryId: number | null = !!dto.categoryId ? dto.categoryId : null;

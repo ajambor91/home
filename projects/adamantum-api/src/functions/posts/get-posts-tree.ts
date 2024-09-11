@@ -1,18 +1,16 @@
 import {createResponse, getRepository} from "../../core/help_functions/functions";
-import { HttpRequest } from "../../core/router/types";
-import { INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE } from "../../core/router/default-responses";
-import { OK_CODE } from "../../core/router/http-statuses";
-import { Posts } from "shared-types";
+import {HttpRequest} from "../../core/router/types";
+import {INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE} from "../../core/router/default-responses";
+import {OK_CODE} from "../../core/router/http-statuses";
 import {PostRepository} from "../../repositories/post.repository";
 import {PostEntity} from "../../entities/post.entity";
 
 
-export const getPostsTree= async (request: HttpRequest<void>): Promise<Response> => {
+export const getPostsTree = async (request: HttpRequest<void>): Promise<Response> => {
   try {
     const postRepository: PostRepository = getRepository(PostRepository, request.env);
     const result: PostEntity[] = await postRepository.getPostsList();
-    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', result)
-    return createResponse({ body: result, code: OK_CODE });
+    return createResponse({body: result, code: OK_CODE});
   } catch (e) {
     console.error(e)
     return createResponse(INTERNAL_SERVER_ERROR_RESPONSE);

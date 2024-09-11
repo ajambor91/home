@@ -1,6 +1,5 @@
-import { EntityClass } from "../core/abstract/entity.abstract";
-import { required } from "../core/decorators/entity.decorator";
-import { PostTypes } from "shared-types";
+import {EntityClass} from "../core/abstract/entity.abstract";
+import {required} from "../core/decorators/entity.decorator";
 import {CategoryDTO} from "../data-transfer-objects/category.dto";
 
 export class CategoryEntity extends EntityClass {
@@ -11,6 +10,7 @@ export class CategoryEntity extends EntityClass {
   @required
   createdAt?: Date;
   deletedAt?: Date | null;
+  parentCategoryName?: string | null;
 
   constructor(dto: CategoryDTO) {
     super();
@@ -19,6 +19,7 @@ export class CategoryEntity extends EntityClass {
     this.categoryParent = dto.categoryParent;
     this.createdAt = dto.createdAt;
     this.deletedAt = dto.deletedAt;
+    this.parentCategoryName = dto.parentCategoryName;
   }
 
   public setCategoryId(categoryId: number): this {

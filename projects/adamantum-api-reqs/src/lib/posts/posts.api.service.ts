@@ -13,6 +13,6 @@ export class PostsApiService {
   // }
   //
   public getPosts$(): Observable<Posts> {
-    return this.httpClient.get<Posts>(`http://127.0.0.1:8787`)
+    return this.httpClient.get<Posts>(`http://127.0.0.1:8787/api/posts`)
   }
 }

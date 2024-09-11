@@ -3,7 +3,8 @@ export class DependencyContainer {
   private singletons: Map<string, any> = new Map<string, any>();
   private factories: Map<string, new (...args: any[]) => any> = new Map<string, new (...args: any[]) => any>();
 
-  private constructor() {}
+  private constructor() {
+  }
 
   public static getInstance(): DependencyContainer {
     if (!DependencyContainer.instance) {

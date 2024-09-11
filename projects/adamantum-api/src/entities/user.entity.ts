@@ -1,5 +1,5 @@
-import { EntityClass } from "../core/abstract/entity.abstract";
-import { required } from "../core/decorators/entity.decorator";
+import {EntityClass} from "../core/abstract/entity.abstract";
+import {required} from "../core/decorators/entity.decorator";
 import {UserDTO} from "../data-transfer-objects/user.dto";
 
 export class UserEntity extends EntityClass {
@@ -11,6 +11,7 @@ export class UserEntity extends EntityClass {
   userPassword?: string;
   @required
   createdAt?: Date;
+
   constructor(dto: UserDTO) {
     super();
     this.userId = dto.userId ?? 0;

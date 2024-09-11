@@ -12,6 +12,8 @@ export interface CategoryDB extends Category {
   categoryParent?: number | null;
   deletedAt?: Date | null;
   categoryName: string | null;
+  parentCategoryName: string | null;
+
 
 }
 export interface CategoryForm extends Omit<Category, 'createdAt' | 'deletedAt' | 'categoryId'>, Pick<Partial<Category>, 'categoryId'>{}

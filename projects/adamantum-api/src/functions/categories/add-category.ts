@@ -1,10 +1,11 @@
 import {createResponse, getRepository} from "../../core/help_functions/functions";
-import { HttpRequest } from "../../core/router/types";
-import { INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE, OK_RESPONSE } from "../../core/router/default-responses";
+import {HttpRequest} from "../../core/router/types";
+import {INTERNAL_SERVER_ERROR_RESPONSE, NOT_FOUND_RESPONSE, OK_RESPONSE} from "../../core/router/default-responses";
 import {NewCategory} from 'shared-types';
 import {CategoryEntity} from "../../entities/category.entity";
 import {CategoryRepository} from "../../repositories/category.repository";
 import {mapCategoryDTOToEntity} from "../../data-transfer-objects/category.dto";
+
 export const addCategory = async (request: HttpRequest<NewCategory>): Promise<Response> => {
   try {
     const payload: NewCategory = request.body;

@@ -1,14 +1,12 @@
-
-import {PostNewForm, postNewForm} from "../../../forms/post-new.form";
-import {CategoryForm, NewPost} from "shared-types";
-import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ChangeDetectionStrategy, Component} from "@angular/core";
 import {RouterOutlet} from "@angular/router";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
-import {PostsService} from "../../../services/posts.service";
-import {CategoryEditForm, categoryForm} from "../../../forms/category.form";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoriesService} from "../../../services/categories.service";
+import {CategoryEditForm, categoryForm} from "../../../forms/category.form";
 import {Observable} from "rxjs";
+import {CategoryForm} from "shared-types";
+
 
 @Component({
   selector: 'app-category-form',

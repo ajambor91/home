@@ -40,8 +40,9 @@ export class PostsListComponent {
     this._router.navigate(['/edit-post', post.postId])
   }
 
-  private deletePost(postId: number): void {
-    throw new Error('Not implemented');
+  private deletePost(post: Post): void {
+    this._postsService.deletePost(post.postId)
+    this.posts$ = this._postsService.getPosts$();
   }
 
 

@@ -1,4 +1,3 @@
-
 import {Env} from "../index";
 import {RepoClass} from "../core/abstract/repo.abstract";
 import {UserEntity} from "../entities/user.entity";
@@ -23,9 +22,7 @@ export class UserRepository extends RepoClass {
   }
 
 
-
   public async addNew(user: UserEntity): Promise<void> {
-    console.log("user", user)
     await this.env.adamantumDb.prepare(INSERT_USER).bind(user.userName, user.userLogin, user.userPassword, getTimestamp(user.createdAt as Date)).run();
   }
 

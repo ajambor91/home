@@ -9,8 +9,9 @@ export class PostRepository extends RepoClass {
   constructor(private env: Env) {
     super();
   }
+
   public async getAll(): Promise<PostEntity[]> {
-    const { results}: any = await this.env.adamantumDb.prepare(SELECT_ALL_POSTS).all();
+    const {results}: any = await this.env.adamantumDb.prepare(SELECT_ALL_POSTS).all();
     return getPostFactory(PostFactoryTypes.LIST_BASIC_POSTS).createManyPosts(results);
   }
 
@@ -24,8 +25,12 @@ export class PostRepository extends RepoClass {
   }
 
   public async updateById(entity: PostEntity): Promise<void> {
-    const {postContent, postTitle} = entity;
-    await this.env.adamantumDb.prepare(UPDATE_POST).bind(postTitle, postContent).run();
+    const {postContent, postTitle, categoryId, postId} = entity;
+    let postCategoryId: number | undefined | null = categoryId;
+    if (!categoryId) {
+      postCategoryId = null;
+    }
+    await this.env.adamantumDb.prepare(UPDATE_POST).bind(postTitle, postContent, postCategoryId, postId).run();
   }
 
   public async addNew(entity: PostEntity): Promise<void> {
@@ -34,7 +39,6 @@ export class PostRepository extends RepoClass {
 
   public async getPostsList(): Promise<any> {
     const {results}: any = await this.env.adamantumDb.prepare(GET_POSTS_LIST).all();
-    console.log('rrrrrresssssultsss', results)
     return getPostFactory(PostFactoryTypes.TREE_NODE_POSTS).createManyPosts(results)
   }
 }

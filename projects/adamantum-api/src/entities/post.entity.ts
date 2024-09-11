@@ -1,7 +1,8 @@
 import {EntityClass} from "../core/abstract/entity.abstract";
 import {required} from "../core/decorators/entity.decorator";
 import {PostDTO} from "../data-transfer-objects/post.dto";
-export  class PostEntity extends EntityClass {
+
+export class PostEntity extends EntityClass {
   postId?: number | null;
   @required
   postTitle?: string;
@@ -14,6 +15,7 @@ export  class PostEntity extends EntityClass {
   deletedAt?: Date | null;
   categoryName?: string | null;
   parentCategoryName?: string | null;
+
   constructor(dto: PostDTO) {
     super();
     this.postId = dto.postId;

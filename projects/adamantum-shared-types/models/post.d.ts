@@ -18,6 +18,7 @@ export interface PostDB extends Post {
   parentCategoryName?: string | null,
 }
 export interface NewPost extends Omit<Post, 'postId' | 'deletedAt' | 'createdAt'>, Partial<Pick<Post, 'categoryId' | 'fullPath'>> {}
+export interface EditPost extends Partial<NewPost>, Pick<Post, 'postId'>{}
 export interface PostRoute extends Pick<Post, 'fullPath' | 'category'> {}
 export interface PostsRoutes extends Array<Route> {}
 export interface Posts extends Array<PostBase> {}
