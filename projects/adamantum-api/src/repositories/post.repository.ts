@@ -4,7 +4,6 @@ import {RepoClass} from "../core/abstract/repo.abstract";
 import {ADD_POST, DELETE_POST, GET_POST_BY_ID, GET_POSTS_LIST, SELECT_ALL_POSTS, UPDATE_POST} from "../db/posts.sql";
 import {getTimestamp} from "../core/help_functions/functions";
 import {getPostFactory, PostFactoryTypes} from "../core/factories/post.factory";
-
 export class PostRepository extends RepoClass {
   constructor(private env: Env) {
     super();
@@ -37,8 +36,8 @@ export class PostRepository extends RepoClass {
     await this.env.adamantumDb.prepare(ADD_POST).bind(entity.postTitle, entity.postContent, entity.fullPath, entity.categoryId, getTimestamp(entity.createdAt)).run();
   }
 
-  public async getPostsList(): Promise<any> {
+  public async getPostsList(): Promise<PostEntity[]> {
     const {results}: any = await this.env.adamantumDb.prepare(GET_POSTS_LIST).all();
-    return getPostFactory(PostFactoryTypes.TREE_NODE_POSTS).createManyPosts(results)
+    return getPostFactory(PostFactoryTypes.TREE_NODE_POSTS).createManyPosts(results);
   }
 }

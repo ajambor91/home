@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, take} from "rxjs";
-import {EditPost, NewPost, Posts} from "shared-types";
+import {EditPost, NewPost, Posts, PostsTree} from "shared-types";
 import {ApiService} from "./api.service";
 import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 import {PostForm} from "../forms/post-new.form";
@@ -33,5 +33,9 @@ export class PostsService {
     this._api.getPost(id).subscribe(result => {
       form.patchValue(result);
     });
+  }
+
+  public getPostsTree$(): Observable<PostsTree> {
+    return this._postsApi.getPostsTree$();
   }
 }

@@ -19,6 +19,7 @@ export class RoutesService {
   }
 
   private mergeRoutes(apiRoutes: PostsRoutes): ITreeNodeRoutes {
+    // @ts-ignore
     const externalRoutes: IRouteEx[] = apiRoutes.map((item: PostRoute) => ({
       path: item.fullPath,
       routeName: item.fullPath,

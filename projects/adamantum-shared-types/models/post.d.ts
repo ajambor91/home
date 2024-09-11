@@ -37,5 +37,15 @@ export interface PostEntity extends Omit<Post, 'postId' | 'createdAt'> {
   postId?: number;
   createdAt?: Date;
 }
+export interface PostTree {
+  createdA: string;
+  postId: number;
+  postTitle: string;
+  fullPath: string;
+  categoryId: null | number;
+  categoryName: string | null
+  parentCategoryName: string | null
+}
+export interface PostsTree extends Array<PostTree> {};
 
 export type PostTypes = Post | NewPost | PostEntity | PostDB;
