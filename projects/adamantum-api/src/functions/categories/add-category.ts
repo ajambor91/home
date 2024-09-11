@@ -8,7 +8,7 @@ import {mapCategoryDTOToEntity} from "../../data-transfer-objects/category.dto";
 
 export const addCategory = async (request: HttpRequest<NewCategory>): Promise<Response> => {
   try {
-    const payload: NewCategory = request.body;
+    const payload: NewCategory = request.body as NewCategory;
     const newCategory: CategoryEntity = mapCategoryDTOToEntity(payload)
     const repo: CategoryRepository = getRepository(CategoryRepository, request.env);
     await repo.addNew(newCategory);

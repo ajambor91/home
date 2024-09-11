@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {Post, Posts} from "shared-types";
 import {Observable} from "rxjs";
@@ -18,14 +18,16 @@ import {Action, ActionTypes, postsTable, TableConfig} from "../../../core/table.
 
 })
 export class PostsListComponent {
-   public posts$: Observable<Posts> = this._postsService.getPosts$() as Observable<Array<any>>;
-   public page: number = 0;
-   public currentPage: number = 0;
-   public totalPages: number = 0;
-   public pages: number[] = [1,2,3]
+  public posts$: Observable<Posts> = this._postsService.getPosts$() as Observable<Array<any>>;
+  public page: number = 0;
+  public currentPage: number = 0;
+  public totalPages: number = 0;
+  public pages: number[] = [1, 2, 3]
   public tableConfig: TableConfig = postsTable;
+
   constructor(private _postsService: PostsService, private _router: Router) {
   }
+
   public runAction(action: Action): void {
     switch (action.action) {
       case ActionTypes.EditPost:
@@ -36,6 +38,7 @@ export class PostsListComponent {
         break
     }
   }
+
   private editPost(post: Post): void {
     this._router.navigate(['/edit-post', post.postId])
   }
@@ -44,7 +47,6 @@ export class PostsListComponent {
     this._postsService.deletePost(post.postId)
     this.posts$ = this._postsService.getPosts$();
   }
-
 
 
 }

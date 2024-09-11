@@ -10,6 +10,7 @@ import {PostRoute, PostsRoutes} from "shared-types";
 @Injectable()
 export class RoutesService {
   private _routes: Observable<IApiRoutes> = this.apiService.getRoutes().pipe(shareReplay())
+
   constructor(private router: Router, private apiService: ApiService) {
   }
 
@@ -32,7 +33,7 @@ export class RoutesService {
         const childRoute: ITreeNodeRoutes = {
           name: curr.category || curr.routeName || curr.path!,
           path: curr.category || curr.path!,
-          children: curr.external && curr.category ? [{ name: curr.routeName!, path: curr.path!, children: [] }] : []
+          children: curr.external && curr.category ? [{name: curr.routeName!, path: curr.path!, children: []}] : []
         };
 
         const parentIndex = acc.children.findIndex(item => item.name === mainKey);
@@ -44,8 +45,8 @@ export class RoutesService {
         name: 'root',
         path: '/root',
         children: [
-          { name: 'home', path: '/home', children: [] },
-          { name: 'blog', path: '/blog', children: [] }
+          {name: 'home', path: '/home', children: []},
+          {name: 'blog', path: '/blog', children: []}
         ]
       } as ITreeNodeRoutes
     );

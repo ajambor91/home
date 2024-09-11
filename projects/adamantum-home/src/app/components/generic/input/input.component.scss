@@ -1,7 +1,8 @@
-.generic-input-container{
-  &__cursor{
+.generic-input-container {
+  &__cursor {
     display: inline-block;
   }
+
   input {
     font-family: 'Consolas', 'Courier New', Courier, monospace;
     background-color: transparent;

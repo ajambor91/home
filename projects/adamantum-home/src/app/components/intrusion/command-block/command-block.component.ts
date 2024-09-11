@@ -1,16 +1,9 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DynamicComponentService } from "../../../services/dynamic-component.service";
-import { CommandComponent } from "../command/command.component";
-import { CommandOutputComponent } from "../command-output/command-output.component";
-import { switchMap } from "rxjs";
+import {AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {DynamicComponentService} from "../../../services/dynamic-component.service";
+import {CommandComponent} from "../command/command.component";
+import {CommandOutputComponent} from "../command-output/command-output.component";
+import {switchMap} from "rxjs";
 
 @Component({
   selector: 'app-command-block',
@@ -22,14 +15,14 @@ import { switchMap } from "rxjs";
 })
 export class CommandBlockComponent implements AfterViewInit {
 
-  @ViewChild('commandContainer', { read: ViewContainerRef }) private commandContainer!: ViewContainerRef;
-  @ViewChild('outputContainer', { read: ViewContainerRef }) private outputContainer!: ViewContainerRef;
-
   @Input() public command!: string[];
   @Input() public output!: string[];
   @Input() public commandsLength!: number;
+  @ViewChild('commandContainer', {read: ViewContainerRef}) private commandContainer!: ViewContainerRef;
+  @ViewChild('outputContainer', {read: ViewContainerRef}) private outputContainer!: ViewContainerRef;
 
-  constructor(private dynamicComponentService: DynamicComponentService) {}
+  constructor(private dynamicComponentService: DynamicComponentService) {
+  }
 
   public ngAfterViewInit(): void {
     this.startComponentCycle(0);
@@ -41,7 +34,7 @@ export class CommandBlockComponent implements AfterViewInit {
     }
 
     this.dynamicComponentService.createCommandComponent(this.commandContainer, CommandComponent, this.command).pipe(
-      switchMap(() => this.dynamicComponentService.createCommandOutputComponent( this.outputContainer, CommandOutputComponent, this.output))
+      switchMap(() => this.dynamicComponentService.createCommandOutputComponent(this.outputContainer, CommandOutputComponent, this.output))
     ).subscribe();
   }
 }

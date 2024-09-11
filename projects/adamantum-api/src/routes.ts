@@ -12,6 +12,8 @@ import {getCategoriesTree} from "./functions/categories/get-categories-tree";
 import {deletePost} from "./functions/posts/delete-post";
 import {editPost} from "./functions/posts/edit-post";
 import {getPost} from "./functions/posts/get-post";
+import {getCategory} from "./functions/categories/get-category";
+import {deleteCategory} from "./functions/categories/delete-category";
 
 export const routes: Routes = [
   {
@@ -29,18 +31,23 @@ export const routes: Routes = [
     method: 'POST',
     function: addPost,
     middleware: jsonify,
-    guard: authGuard
+    guard: authGuard,
+
   },
   {
     pathname: '/api/posts/:id',
     method: 'DELETE',
-    function: deletePost
+    function: deletePost,
+    guard: authGuard
+
   },
   {
     pathname: '/api/posts/:id',
     method: 'PATCH',
     function: editPost,
     middleware: jsonify,
+    guard: authGuard
+
   },
   {
     pathname: '/api/posts-tree',
@@ -71,6 +78,17 @@ export const routes: Routes = [
     pathname: '/api/categories',
     method: 'GET',
     function: getCategories
+  },
+  {
+    pathname: '/api/categories/:id',
+    method: 'GET',
+    function: getCategory
+  },
+  {
+    pathname: '/api/categories/:id',
+    method: 'DELETE',
+    guard: authGuard,
+    function: deleteCategory
   },
   {
     pathname: '/api/categories-tree',

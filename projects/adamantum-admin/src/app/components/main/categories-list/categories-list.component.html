@@ -1,3 +1,19 @@
-<pre>
-  {{categories$ | async | json}}
-</pre>
+<div class="container mt-4">
+  <h2 class="mb-3">Lista postów</h2>
+
+  <app-table (action)="runAction($event)" [tableConfig]="tableConfig" [tableData]="categories$ | async"></app-table>
+
+  <!--  <nav>-->
+  <!--    <ul class="pagination justify-content-center">-->
+  <!--      <li class="page-item" [class.disabled]="currentPage === 1">-->
+  <!--        <a class="page-link" (click)="previousPage()">Poprzednia</a>-->
+  <!--      </li>-->
+  <!--      <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">-->
+  <!--        <a class="page-link" (click)="goToPage(page)">{{ page }}</a>-->
+  <!--      </li>-->
+  <!--      <li class="page-item" [class.disabled]="currentPage === totalPages">-->
+  <!--        <a class="page-link" (click)="nextPage()">Następna</a>-->
+  <!--      </li>-->
+  <!--    </ul>-->
+  <!--  </nav>-->
+</div>

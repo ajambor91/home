@@ -1,18 +1,19 @@
 <ng-container *ngIf="routes$ | async as routes">
-  <section class="directory directory--tree" aria-labelledby="directory-heading">
-    <h2 id="directory-heading" class="visually-hidden">Directory Structure</h2>
-    <ul class="directory__list" aria-label="Directory list">
+  <section aria-labelledby="directory-heading" class="directory directory--tree">
+    <h2 class="visually-hidden" id="directory-heading">Directory Structure</h2>
+    <ul aria-label="Directory list" class="directory__list">
       <li class="directory__item directory__root">{{ routes.name }}</li>
       <li>
         <ul class="directory__sublist">
           <ng-container *ngFor="let route of routes.children">
-            <li class="directory__subitem" [ngClass]="{'directory__home': route.name === 'home', 'directory__blog': route.name === 'blog'}">
+            <li [ngClass]="{'directory__home': route.name === 'home', 'directory__blog': route.name === 'blog'}"
+                class="directory__subitem">
               {{ route.name }}
               <ul class="directory__sublist">
                 <ng-container *ngFor="let childRoute of route.children">
                   <li class="directory__subitem">
                     <ng-container *ngIf="!childRoute.children || childRoute.children.length === 0; else category">
-                      <a class="directory__link" (click)="selectAndPassComponent(route)">
+                      <a (click)="selectAndPassComponent(route)" class="directory__link">
                         {{ childRoute.name }}
                       </a>
                     </ng-container>
@@ -23,7 +24,7 @@
                           <ng-container *ngFor="let category of childRoute.children">
                             <ul class="directory__sublist">
                               <li class="directory__subitem">
-                                <a class="directory__link" (click)="selectAndPassComponent(route)">
+                                <a (click)="selectAndPassComponent(route)" class="directory__link">
                                   {{ category.path }}
                                 </a>
                               </li>

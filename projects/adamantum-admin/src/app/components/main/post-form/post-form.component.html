@@ -1,22 +1,24 @@
 <ng-container *ngIf="postForm">
-<form (submit)="onSubmit()" [formGroup]="postForm" class="p-3">
-  <div class="mb-3">
-    <label for="post-title" class="form-label">Tytuł postu</label>
-    <input id="post-title" type="text" class="form-control" formControlName="postTitle" placeholder="Wpisz tytuł">
-  </div>
+  <form (submit)="onSubmit()" [formGroup]="postForm" class="p-3">
+    <div class="mb-3">
+      <label class="form-label" for="post-title">Tytuł postu</label>
+      <input class="form-control" formControlName="postTitle" id="post-title" placeholder="Wpisz tytuł" type="text">
+    </div>
 
-  <div class="mb-3">
-    <label for="post-content" class="form-label">Treść postu</label>
-    <textarea id="post-content" class="form-control" formControlName="postContent" rows="4" placeholder="Wpisz treść"></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="category" class="form-label">Kategoria</label>
-    <select id="category" class="form-select" formControlName="categoryId">
-      <option value="" disabled selected>Wybierz kategorię</option>
-      <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}</option>
-    </select>
-  </div>
+    <div class="mb-3">
+      <label class="form-label" for="post-content">Treść postu</label>
+      <textarea class="form-control" formControlName="postContent" id="post-content" placeholder="Wpisz treść"
+                rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="category">Kategoria</label>
+      <select class="form-select" formControlName="categoryId" id="category">
+        <option disabled selected value="">Wybierz kategorię</option>
+        <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}
+        </option>
+      </select>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Dodaj post</button>
-</form>
+    <button class="btn btn-primary" type="submit">Dodaj post</button>
+  </form>
 </ng-container>

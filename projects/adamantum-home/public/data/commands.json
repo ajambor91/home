@@ -1,7 +1,9 @@
 [
   {
     "inputs": {
-      "command": ["> ping -c 4 adamjambor.com"],
+      "command": [
+        "> ping -c 4 adamjambor.com"
+      ],
       "output": [
         "PING adamjambor.com (192.168.1.1): 56 data bytes\n",
         "64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.035 ms\n",
@@ -15,7 +17,9 @@
   },
   {
     "inputs": {
-      "command": ["> nmap -p 1-65535 -T4 target.website.com\n"],
+      "command": [
+        "> nmap -p 1-65535 -T4 target.website.com\n"
+      ],
       "output": [
         "Starting Nmap 7.80 ( https://nmap.org ) at 2024-09-03 12:34 UTC\n",
         "Nmap scan report for target.website.com (192.168.1.1)\n",

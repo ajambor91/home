@@ -128,14 +128,16 @@ export const getPropOrNull = <T extends object, K extends keyof T>(obj: T, prop:
   return Object.prototype.hasOwnProperty.call(obj, prop) ? obj[prop] : null;
 };
 
-export const getQueryParam = (queryParams: {[key: string]: string | undefined | null} | undefined, paramName: string) => {
+export const getQueryParam = (queryParams: {
+  [key: string]: string | undefined | null
+} | undefined, paramName: string) => {
   if (!queryParams) {
     return null;
   }
   const param: string | undefined | null = queryParams[paramName];
   if (param) {
     return param as number | string
-  } else  {
+  } else {
     return null;
   }
 }

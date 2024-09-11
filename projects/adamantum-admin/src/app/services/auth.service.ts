@@ -9,11 +9,13 @@ import {LocalStorageService} from "./local-storage.service";
 export class AuthService {
   private readonly _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   private readonly _user: Observable<User | null> = this._userSubject.asObservable().pipe(shareReplay(1));
+
   constructor(private _apiService: ApiService, private _router: Router, private _localStorageService: LocalStorageService) {
   }
-  public login(user: UserLogin): void{
+
+  public login(user: UserLogin): void {
     this._apiService.login$(user).subscribe(user => {
-      if(!!user) {
+      if (!!user) {
         this._userSubject.next(user);
         this._localStorageService.setUser(user);
         this._router.navigate([''])

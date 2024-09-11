@@ -1,12 +1,13 @@
 import {Route} from "@angular/router";
 
-export interface IRouteEx extends Route{
+export interface IRouteEx extends Route {
   routeName?: string;
   external: boolean;
   category?: string;
-  fullPath?:string;
+  fullPath?: string;
 
 }
+
 export interface IRoutesEx extends Array<IRouteEx> {
 
 }

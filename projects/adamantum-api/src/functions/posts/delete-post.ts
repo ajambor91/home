@@ -10,7 +10,7 @@ import {PostRepository} from "../../repositories/post.repository";
 
 export const deletePost = async (request: HttpRequest<void>): Promise<Response> => {
   try {
-    const postId: number | null =  request.params?.id ? +request.params.id : null;
+    const postId: number | null = request.params?.id ? +request.params.id : null;
     if (!postId) {
       return createResponse(BAD_REQUEST_RESPONSE)
     }

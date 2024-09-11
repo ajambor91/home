@@ -1,26 +1,28 @@
-import { ComponentRef, Injectable, Type, ViewContainerRef } from "@angular/core";
-import { Observable, Subscription, switchMap, take } from "rxjs";
-import { CommandBlockComponent } from "../components/intrusion/command-block/command-block.component";
-import { CommandOutputComponent } from "../components/intrusion/command-output/command-output.component";
-import { CommandComponent } from "../components/intrusion/command/command.component";
-import { LocalDataService } from "./local-data.service";
-import { ELocalDataEnum } from "../enums/local-data.enum";
-import { ICommandComponentsData } from "../models/local-data.model";
-import { IntrusionComponent } from "../components/intrusion/intrusion.component";
-import { MainPageComponent } from "../components/main-page/main-page.component";
-import { CallbacksService } from "./callbacks.service";
-import { NavComponent } from "../components/main-page/nav/nav.component";
-import { RoutesComponent } from "../components/main-page/nav/routes/routes.component";
-import { IRouteEx } from "../app.routes";
+import {ComponentRef, Injectable, Type, ViewContainerRef} from "@angular/core";
+import {Observable, Subscription, switchMap, take} from "rxjs";
+import {CommandBlockComponent} from "../components/intrusion/command-block/command-block.component";
+import {CommandOutputComponent} from "../components/intrusion/command-output/command-output.component";
+import {CommandComponent} from "../components/intrusion/command/command.component";
+import {LocalDataService} from "./local-data.service";
+import {ELocalDataEnum} from "../enums/local-data.enum";
+import {ICommandComponentsData} from "../models/local-data.model";
+import {IntrusionComponent} from "../components/intrusion/intrusion.component";
+import {MainPageComponent} from "../components/main-page/main-page.component";
+import {CallbacksService} from "./callbacks.service";
+import {NavComponent} from "../components/main-page/nav/nav.component";
+import {RoutesComponent} from "../components/main-page/nav/routes/routes.component";
+import {IRouteEx} from "../app.routes";
 
 @Injectable()
 export class DynamicComponentService {
   private intrussionSubs: Subscription = new Subscription();
   private _isLastCommand: boolean = false;
+
   constructor(
     private localDataService: LocalDataService,
     private callbacksService: CallbacksService
-  ) {}
+  ) {
+  }
 
 
   public createCommandComponent(container: ViewContainerRef, component: Type<CommandComponent>, input: any): Observable<void> {

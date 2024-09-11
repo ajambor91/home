@@ -1,1 +1,1 @@
-<app-post-form [categories$]="categories$" [postForm]="editPostForm" (passPost)="onSubmit($event)"></app-post-form>
+<app-post-form (passPost)="onSubmit($event)" [categories$]="categories$" [postForm]="editPostForm"></app-post-form>

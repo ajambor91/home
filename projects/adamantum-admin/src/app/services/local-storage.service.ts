@@ -5,15 +5,16 @@ import {User} from "shared-types";
 
 @Injectable({providedIn: "root"})
 export class LocalStorageService {
-  private readonly appKey: string = this. _environmentsService.appDataKey;
+  private readonly appKey: string = this._environmentsService.appDataKey;
 
   constructor(private _environmentsService: EnvironmentsService) {
   }
-  public getData(): LocalStorageModel | null{
+
+  public getData(): LocalStorageModel | null {
     return this.getFromStore();
   }
 
-  public getToken(): string | null{
+  public getToken(): string | null {
     return this.getFromStore()?.token || null;
   }
 
@@ -34,14 +35,14 @@ export class LocalStorageService {
     const data: LocalStorageModel | null = this.getFromStore();
     if (!data) {
       dataToSet = {} as LocalStorageModel;
-    } else  {
+    } else {
       dataToSet = data;
     }
     dataToSet[key] = value;
     localStorage.setItem(this.appKey, JSON.stringify(dataToSet))
   }
 
-  private getFromStore(): LocalStorageModel | null{
+  private getFromStore(): LocalStorageModel | null {
     let storageData: string | null = localStorage.getItem(this.appKey);
     if (!!storageData) {
       return JSON.parse(localStorage.getItem(this.appKey) as string) as LocalStorageModel;

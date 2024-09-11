@@ -1,5 +1,4 @@
-
-import {PostForm } from "../../../forms/post-new.form";
+import {PostForm} from "../../../forms/post-new.form";
 import {EditPost, NewPost} from "shared-types";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core";
@@ -19,10 +18,11 @@ import {Observable} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class PostFormComponent  {
-  @Input() public  postForm!: FormGroup<PostForm>;
-  @Input() public  categories$!: Observable<any>;
+export class PostFormComponent {
+  @Input() public postForm!: FormGroup<PostForm>;
+  @Input() public categories$!: Observable<any>;
   @Output() public passPost: EventEmitter<NewPost | EditPost> = new EventEmitter<NewPost | EditPost>()
+
   constructor() {
   }
 

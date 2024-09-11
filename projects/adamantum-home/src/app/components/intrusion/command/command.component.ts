@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild, ElementRef } from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import Typed from 'typed.js';
-import { CallbacksService } from '../../../services/callbacks.service';
+import {CallbacksService} from '../../../services/callbacks.service';
 
 @Component({
   selector: 'app-command-output-block',
@@ -16,7 +16,8 @@ export class CommandComponent implements AfterViewInit {
 
   private typed!: Typed;
 
-  constructor(private callbacksService: CallbacksService) {}
+  constructor(private callbacksService: CallbacksService) {
+  }
 
   public ngAfterViewInit(): void {
     this.typed = new Typed(this.commandElement.nativeElement, {

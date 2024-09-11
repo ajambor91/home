@@ -1,12 +1,6 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DynamicComponentService } from "../../services/dynamic-component.service";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {DynamicComponentService} from "../../services/dynamic-component.service";
 
 @Component({
   selector: 'app-intrusion',
@@ -18,9 +12,10 @@ import { DynamicComponentService } from "../../services/dynamic-component.servic
 })
 export class IntrusionComponent implements AfterViewInit {
 
-  @ViewChild('commandContainer', { read: ViewContainerRef }) private commandContainer!: ViewContainerRef;
+  @ViewChild('commandContainer', {read: ViewContainerRef}) private commandContainer!: ViewContainerRef;
 
-  constructor(private dynamicComponentService: DynamicComponentService) {}
+  constructor(private dynamicComponentService: DynamicComponentService) {
+  }
 
   public ngAfterViewInit(): void {
     this.createCommandBlock();

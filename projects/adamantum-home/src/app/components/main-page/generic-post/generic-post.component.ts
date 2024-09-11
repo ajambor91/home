@@ -7,7 +7,6 @@ import {ApiService} from "../../../services/api.service";
 import {AsyncPipe, NgIf} from "@angular/common";
 
 
-
 @Component({
   selector: 'app-generic-post',
   standalone: true,

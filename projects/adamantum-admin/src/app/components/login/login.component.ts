@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { IUserLoginForm, loginForm} from "../../forms/login.form";
+import {UserLoginForm, loginForm} from "../../forms/login.form";
 import {AuthService} from "../../services/auth.service";
 import {UserLogin} from "shared-types";
 
@@ -13,7 +13,7 @@ import {UserLogin} from "shared-types";
   imports: [NgbTypeahead, ReactiveFormsModule]
 })
 export class LoginComponent {
-  public readonly loginForm: FormGroup<IUserLoginForm> = loginForm();
+  public readonly loginForm: FormGroup<UserLoginForm> = loginForm();
 
   constructor(private authService: AuthService) {
   }

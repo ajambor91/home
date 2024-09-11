@@ -1,10 +1,11 @@
 import {
   BAD_REQUEST_RESPONSE,
-  INTERNAL_SERVER_ERROR_RESPONSE, METHOD_NOT_ALLOWED_RESPONSE,
+  INTERNAL_SERVER_ERROR_RESPONSE,
+  METHOD_NOT_ALLOWED_RESPONSE,
   NOT_FOUND_RESPONSE,
   UNAUTHORIZED_RESPONSE
 } from "./default-responses";
-import {Route, RouteRaw, Routes} from "./types";
+import {Route, RouteRaw} from "./types";
 import {Env} from "../../index";
 import {routes} from "../../routes";
 import {createResponse, createRouteBody} from "../help_functions/functions";
@@ -20,15 +21,15 @@ export class Router {
 
   public async route(): Promise<Response> {
     try {
-     const matchedRoutes: Route[] | undefined = routes.reduce((acc, curr) => {
+      const matchedRoutes: Route[] | undefined = routes.reduce((acc, curr) => {
         const regexpRoutePath = curr.pathname.replace(/:([^\s/]+)/g, (_, paramName) => {
           return '([\\w-]+)';
         });
         if (new RegExp(`^${regexpRoutePath}$`).test(this._route.pathname)) {
           acc.push(curr)
         }
-        return  acc
-      },[] as Route[])
+        return acc
+      }, [] as Route[])
       if (!matchedRoutes) {
         return createResponse(NOT_FOUND_RESPONSE)
       }
@@ -37,7 +38,7 @@ export class Router {
         return createResponse(METHOD_NOT_ALLOWED_RESPONSE);
       }
 
-        this.currentRoute = matchedRouteByMethod;
+      this.currentRoute = matchedRouteByMethod;
       if (!this.currentRoute) return createResponse(NOT_FOUND_RESPONSE);
       this.parseQueries();
       this.parseParams();

@@ -1,10 +1,14 @@
 import {
-  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, NgZone, OnInit,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnInit,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { DynamicComponentService } from "../../services/dynamic-component.service";
+import {DynamicComponentService} from "../../services/dynamic-component.service";
 import {GreetingsService} from "../../services/greetings.service";
 import {GreetingComponentComponent} from "./greeting-component/greeting-component.component";
 import {InputComponent} from "../generic/input/input.component";
@@ -26,15 +30,16 @@ import {IRouteEx} from "../../app.routes";
     RouterModule
   ]
 })
-export class MainPageComponent  implements OnInit, AfterViewInit{
-  @ViewChild('navContainer', { read: ViewContainerRef }) private navContainer!: ViewContainerRef;
-  public get lastLoginDate(): string | null{
-    return this.greetingsService.getLastLogin();
-  }
-
+export class MainPageComponent implements OnInit, AfterViewInit {
   public currentTime!: string;
+  @ViewChild('navContainer', {read: ViewContainerRef}) private navContainer!: ViewContainerRef;
+
   constructor(private zone: NgZone, private greetingsService: GreetingsService, private dynamicComponentService: DynamicComponentService, private callbackService: CallbacksService, private router: Router, private cdr: ChangeDetectorRef) {
 
+  }
+
+  public get lastLoginDate(): string | null {
+    return this.greetingsService.getLastLogin();
   }
 
   ngOnInit(): void {
@@ -53,6 +58,7 @@ export class MainPageComponent  implements OnInit, AfterViewInit{
   private getLastLoginDate(): void {
     this.greetingsService.setLoginDate();
   }
+
   private updateTime(): void {
     this.zone.runOutsideAngular(() => {
       this.setTime();
@@ -64,15 +70,16 @@ export class MainPageComponent  implements OnInit, AfterViewInit{
     });
   }
 
-private setTime(): void {
-  const now = new Date();
-  this.currentTime = now.toLocaleTimeString('en-GB', { hour12: false });
-  this.cdr.detectChanges();
-}
+  private setTime(): void {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString('en-GB', {hour12: false});
+    this.cdr.detectChanges();
+  }
+
   private addGenericComponent(): void {
- this.callbackService.genericComponentCallback.subscribe((res: IRouteEx) => {
+    this.callbackService.genericComponentCallback.subscribe((res: IRouteEx) => {
       this.dynamicComponentService.addGenericComponent(this.navContainer, res);
-      this.router.navigate([res.path], { replaceUrl: true });
+      this.router.navigate([res.path], {replaceUrl: true});
       this.dynamicComponentService.createNav(this.navContainer)
     });
   }

@@ -1,4 +1,3 @@
-
 import {postForm, PostForm} from "../../../forms/post-new.form";
 import {EditPost, NewPost} from "shared-types";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -23,10 +22,12 @@ import {PostFormComponent} from "../post-form/post-form.component";
 export class NewPostComponent {
   public readonly newPostForm: FormGroup<PostForm> = postForm();
   public readonly categories$: Observable<any> = this._categoriesService.getCategories$();
+
   constructor(private _postService: PostsService, private _categoriesService: CategoriesService) {
   }
 
   public onSubmit(data: NewPost | EditPost): void {
     const post: NewPost = data as NewPost;
     this._postService.addPost(post);
-  }}
+  }
+}

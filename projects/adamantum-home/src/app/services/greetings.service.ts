@@ -9,7 +9,8 @@ export class GreetingsService {
     const isoString: string = now.toISOString();
     localStorage.setItem('lastLoginDate', isoString)
   }
-  public getLastLogin(): string | null{
+
+  public getLastLogin(): string | null {
     return localStorage.getItem('lastLoginDate') ?? null;
   }
 }

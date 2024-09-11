@@ -11,6 +11,8 @@ export class LocalDataService {
   constructor(private httpClient: HttpClient) {
 
   }
+
   public getData(dataType: ELocalDataEnum): Observable<ICommandComponentsData[]> {
-    return this.httpClient.get<any>( `${this.dataUrl}${dataType}`);
-  }}
+    return this.httpClient.get<any>(`${this.dataUrl}${dataType}`);
+  }
+}

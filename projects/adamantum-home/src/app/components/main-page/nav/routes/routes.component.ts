@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from "
 import {RoutesService} from "../../../../services/routes.service";
 import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {IRouteEx, ITreeNodeRoutes} from "../../../../models/route.model";
+import {ITreeNodeRoutes} from "../../../../models/route.model";
 import {Observable} from "rxjs";
 import {CallbacksService} from "../../../../services/callbacks.service";
 
@@ -31,13 +31,11 @@ export class RoutesComponent {
   @Input() public lastLoginDate!: string | null;
 
 
-
-  public  routes$: Observable<ITreeNodeRoutes> = this.routeService.getRoutes();
+  public routes$: Observable<ITreeNodeRoutes> = this.routeService.getRoutes();
 
 
   constructor(private routeService: RoutesService, private callbackService: CallbacksService) {
   }
-
 
 
   public selectAndPassComponent(route: any): void {

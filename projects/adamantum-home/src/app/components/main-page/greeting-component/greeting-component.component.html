@@ -1,28 +1,28 @@
 <div class="greeting greeting--full">
-  <header id="ascii-logo" class="greeting__logo" aria-labelledby="logo-heading">
-    <img src="/images/ascii-logo.svg" alt="ASCII representation of the AdamantiumOS logo" aria-hidden="true" />
-    <h1 id="logo-heading" class="visually-hidden">Welcome to AdamantiumOS</h1>
+  <header aria-labelledby="logo-heading" class="greeting__logo" id="ascii-logo">
+    <img alt="ASCII representation of the AdamantiumOS logo" aria-hidden="true" src="/images/ascii-logo.svg"/>
+    <h1 class="visually-hidden" id="logo-heading">Welcome to AdamantiumOS</h1>
   </header>
-  <section id="greetings-messages" class="greeting__messages" aria-labelledby="greeting-heading">
-    <h2 id="greeting-heading" class="visually-hidden">System Information</h2>
-    <ul class="greeting__messages-list" aria-label="System messages">
+  <section aria-labelledby="greeting-heading" class="greeting__messages" id="greetings-messages">
+    <h2 class="visually-hidden" id="greeting-heading">System Information</h2>
+    <ul aria-label="System messages" class="greeting__messages-list">
       <li class="greeting__messages-item">Welcome to AdamantiumOS 20.04 LTS (Resilient GNU/Linux x86_64)</li>
-      <li class="greeting__messages-item">Current time: {{currentTime}}</li>
+      <li class="greeting__messages-item">Current time: {{ currentTime }}</li>
       <li class="greeting__messages-item">Current location: Katowice</li>
 
       <li class="greeting__messages-item">
         <span aria-label="Documentation">* Documentation:</span>
-        <a href="https://help.ubuntu.com" aria-label="Ubuntu Documentation">https://help.ubuntu.com</a>
+        <a aria-label="Ubuntu Documentation" href="https://help.ubuntu.com">https://help.ubuntu.com</a>
       </li>
       <li class="greeting__messages-item">
         <span aria-label="Management">* Management:</span>
-        <a href="https://landscape.canonical.com" aria-label="Canonical Landscape Management">https://landscape.canonical.com</a>
+        <a aria-label="Canonical Landscape Management" href="https://landscape.canonical.com">https://landscape.canonical.com</a>
       </li>
       <li class="greeting__messages-item">
         <span aria-label="Support">* Support:</span>
-        <a href="https://ubuntu.com/advantage" aria-label="Ubuntu Advantage Support">https://ubuntu.com/advantage</a>
+        <a aria-label="Ubuntu Advantage Support" href="https://ubuntu.com/advantage">https://ubuntu.com/advantage</a>
       </li>
-      <li class="greeting__messages-item">Last login: <span aria-label="Last login date">{{lastLoginDate}}</span></li>
+      <li class="greeting__messages-item">Last login: <span aria-label="Last login date">{{ lastLoginDate }}</span></li>
     </ul>
     <div class="greeting__messages-info">
       <p>For further information, please type 'help'.</p>

@@ -28,7 +28,7 @@ export class CategoryRepository extends RepoClass {
   }
 
   public async softDeleteById(id: number): Promise<void> {
-    await this.env.adamantumDb.prepare(DELETE_CATEGORY).bind(id).run();
+    await this.env.adamantumDb.prepare(DELETE_CATEGORY).bind(getTimestamp(new Date()), id).run();
   }
 
   public async updateById(entity: CategoryEntity): Promise<void> {

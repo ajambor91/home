@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AdamantumApiReqsService } from '../adamantum-api-reqs.service';
+import {AdamantumApiReqsService} from '../adamantum-api-reqs.service';
 
 describe('AdamantumApiReqsService', () => {
   let service: AdamantumApiReqsService;

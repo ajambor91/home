@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Observable, of, take} from "rxjs";
-import {EditPost, NewPost, Post, Posts} from "shared-types";
+import {Observable, take} from "rxjs";
+import {EditPost, NewPost, Posts} from "shared-types";
 import {ApiService} from "./api.service";
 import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 import {PostForm} from "../forms/post-new.form";
 import {FormGroup} from "@angular/forms";
+
 // import {PostsApiService} from "adamantum-api-reqs";
 
 @Injectable()
@@ -13,7 +14,6 @@ export class PostsService {
   }
 
   public getPosts$(): Observable<Posts> {
-    // return of([] as Posts);
     return this._postsApi.getPosts$().pipe(take(1));
   }
 
@@ -29,9 +29,9 @@ export class PostsService {
     this._api.deletePost$(id).subscribe()
   }
 
-  public getPost(id: number, form: FormGroup<PostForm>): void{
-      this._api.getPost(id).subscribe(result => {
-        form.patchValue(result);
-      });
+  public getPost(id: number, form: FormGroup<PostForm>): void {
+    this._api.getPost(id).subscribe(result => {
+      form.patchValue(result);
+    });
   }
 }

@@ -1,6 +1,9 @@
 import {
-  AfterViewInit, ChangeDetectionStrategy,
-  Component, ElementRef, Input,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -15,18 +18,18 @@ import {DynamicComponentService} from "../../../services/dynamic-component.servi
   changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
-export class NavComponent implements AfterViewInit{
+export class NavComponent implements AfterViewInit {
   @ViewChild('commandElement') commandElement!: ElementRef;
-  @ViewChild('navContainer', { read: ViewContainerRef }) private navContainer!: ViewContainerRef;
-
   @Input() public lastLoginDate!: string | null;
+  @ViewChild('navContainer', {read: ViewContainerRef}) private navContainer!: ViewContainerRef;
   private typed!: Typed;
 
 
   constructor(private dynamicComponentService: DynamicComponentService) {
   }
+
   public ngAfterViewInit(): void {
-    const routesCreator: () => void =this.createRoutesComponent.bind(this)
+    const routesCreator: () => void = this.createRoutesComponent.bind(this)
     this.typed = new Typed(this.commandElement.nativeElement, {
       strings: ['> ls -R'],
       typeSpeed: 50,

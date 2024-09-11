@@ -3,12 +3,12 @@
     <h2 class="mb-4">Adamantum Admin</h2>
     <form (submit)="onSubmit()" [formGroup]="loginForm" class="p-4 border rounded shadow">
       <div class="mb-3">
-        <input type="text" class="form-control" formControlName="userLogin" placeholder="Login">
+        <input class="form-control" formControlName="userLogin" placeholder="Login" type="text">
       </div>
       <div class="mb-3">
-        <input type="password" class="form-control" formControlName="userPassword" placeholder="Hasło">
+        <input class="form-control" formControlName="userPassword" placeholder="Hasło" type="password">
       </div>
-      <button type="submit" class="btn btn-primary w-100">Loguj</button>
+      <button class="btn btn-primary w-100" type="submit">Loguj</button>
     </form>
   </div>
 </div>
