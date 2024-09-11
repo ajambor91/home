@@ -52,8 +52,7 @@ export const routes: Routes = [
   {
     pathname: '/api/posts-tree',
     method: 'GET',
-    function: getPostsTree,
-    middleware: jsonify
+    function: getPostsTree
   },
   {
     pathname: '/api/users/login',
