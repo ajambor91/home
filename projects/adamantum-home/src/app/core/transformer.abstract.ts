@@ -2,7 +2,7 @@ import {ISupportInterface} from "./support.interface";
 import {Processor} from "./processor";
 
 
-export abstract class TransformerAbstract<T, U> implements ISupportInterface {
+export abstract class TransformerAbstract<T, U> implements ISupportInterface<any> {
   constructor(private processor: Processor) {}
 
   public support(item: any): boolean {
