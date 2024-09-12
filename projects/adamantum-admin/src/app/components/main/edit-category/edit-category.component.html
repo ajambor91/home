@@ -1,1 +1,2 @@
-<app-category-form [categories$]="categories$" [categoryForm]="categoryForm" (onSubmitEmit)="onSubmit($event)"></app-category-form>
+<app-category-form (onSubmitEmit)="onSubmit($event)" [categories$]="categories$"
+                   [categoryForm]="categoryForm"></app-category-form>

@@ -6,16 +6,22 @@ import {IRouteEx, IRoutesEx, ITreeNodeRoutes} from "../models/route.model";
 import {IApiRoutes} from "../models/api.model";
 import {GenericPostComponent} from "../components/main-page/generic-post/generic-post.component";
 import {PostRoute, PostsRoutes} from "shared-types";
+import {PostsTransformer} from "../transformers/posts.transformer";
+import {Store} from "@ngrx/store";
+import {selectAllPosts} from "../store/posts.selectors";
 
 @Injectable()
-export class RoutesService {
+export class PostsService {
   private _routes: Observable<IApiRoutes> = this.apiService.getRoutes().pipe(shareReplay())
 
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(private router: Router, private apiService: ApiService, private transformer: PostsTransformer, private store: Store) {
   }
 
-  public getRoutes(): Observable<ITreeNodeRoutes> {
-    return this._routes.pipe(map(this.mergeRoutes.bind(this)));
+  public getPosts(): Observable<ITreeNodeRoutes> {
+    return this.store.select(selectAllPosts).pipe(
+      map(res => this.transformer.transform(res)),
+      map(() => ({} as ITreeNodeRoutes))
+    )
   }
 
   private mergeRoutes(apiRoutes: PostsRoutes): ITreeNodeRoutes {

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {UserLoginForm, loginForm} from "../../forms/login.form";
+import {loginForm, UserLoginForm} from "../../forms/login.form";
 import {AuthService} from "../../services/auth.service";
 import {UserLogin} from "shared-types";
 

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {Category, CategoryForm, EditCategory, NewCategory, Posts} from "shared-types";
+import {Category, EditCategory, NewCategory, Posts} from "shared-types";
 import {ApiService} from "./api.service";
 
 

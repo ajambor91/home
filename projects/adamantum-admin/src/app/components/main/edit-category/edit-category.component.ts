@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
+import {ActivatedRoute, RouterOutlet} from "@angular/router";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoriesService} from "../../../services/categories.service";
@@ -20,8 +20,8 @@ import {CategoryFormComponent} from "../category-form/category-form.component";
 
 })
 export class EditCategoryComponent implements OnInit {
-  public  categoryForm: FormGroup<CategoryEditForm> = categoryForm();
-  public  categories$: Observable<any> = this._categoriesService.getCategories$();
+  public categoryForm: FormGroup<CategoryEditForm> = categoryForm();
+  public categories$: Observable<any> = this._categoriesService.getCategories$();
 
   constructor(private _categoriesService: CategoriesService, private _route: ActivatedRoute) {
   }
@@ -29,6 +29,11 @@ export class EditCategoryComponent implements OnInit {
   public ngOnInit(): void {
     this.setForm();
     console.log('dsfdsfgregrtegrgrg')
+  }
+
+  public onSubmit(category: EditCategory | NewCategory): void {
+    const editedCategory: EditCategory = category;
+    this._categoriesService.editCategory(editedCategory);
   }
 
   private setForm(): void {
@@ -39,10 +44,5 @@ export class EditCategoryComponent implements OnInit {
     console.log(idParam)
     const categoryId: number = +idParam;
     this._categoriesService.getCategory(categoryId).subscribe(res => this.categoryForm.patchValue(res))
-  }
-
-  public onSubmit(category: EditCategory | NewCategory): void {
-    const editedCategory: EditCategory = category;
-    this._categoriesService.editCategory(editedCategory);
   }
 }

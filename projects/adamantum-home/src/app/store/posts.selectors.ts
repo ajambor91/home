@@ -1,5 +1,5 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { PostTree } from 'shared-types';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {PostTree} from 'shared-types';
 
 export const selectPostsFeature = createFeatureSelector<{ posts: PostTree[] }>('posts');
 

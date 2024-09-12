@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Observable, take} from "rxjs";
-import {EditPost, NewPost, Posts, PostsTree} from "shared-types";
+import {map, Observable, take} from "rxjs";
+import {EditPost, NewPost, Posts, PostsTree, PostTree} from "shared-types";
 import {ApiService} from "./api.service";
 import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 import {PostForm} from "../forms/post-new.form";
 import {FormGroup} from "@angular/forms";
+import {PostsTreeClass} from "../../../../adamantum-home/src/app/classes/posts-tree.class";
 
 // import {PostsApiService} from "adamantum-api-reqs";
 
@@ -36,6 +37,6 @@ export class PostsService {
   }
 
   public getPostsTree$(): Observable<PostsTree> {
-    return this._postsApi.getPostsTree$();
+    return this._postsApi.getPostsTree$().pipe(map(posts => posts.map<PostTree>(post => new PostsTreeClass(post.categoryId, post.categoryName, post.createdA, post.fullPath, post.parentCategoryName, post.postId, post.postTitle))));
   }
 }

@@ -17,6 +17,7 @@ import {DynamicComponentService} from "../../../services/dynamic-component.servi
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
+
 })
 export class NavComponent implements AfterViewInit {
   @ViewChild('commandElement') commandElement!: ElementRef;

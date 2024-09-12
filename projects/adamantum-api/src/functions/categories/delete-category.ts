@@ -7,7 +7,7 @@ export const deleteCategory = async (request: HttpRequest<void>): Promise<Respon
   try {
 
     const repo: CategoryRepository = getRepository(CategoryRepository, request.env);
-    const categoryId: number = getQueryParam(request.queries, 'id') as  number;
+    const categoryId: number = getQueryParam(request.queries, 'id') as number;
     await repo.softDeleteById(categoryId);
     return createResponse(OK_RESPONSE);
   } catch (e) {

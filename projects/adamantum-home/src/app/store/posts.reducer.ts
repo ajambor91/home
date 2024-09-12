@@ -2,7 +2,7 @@ import {createReducer, on} from "@ngrx/store";
 import {loadPostsSuccess} from "./posts.actions";
 import {PostsTree} from "../../../../adamantum-shared-types";
 
-const initialState:{
+const initialState: {
   posts: PostsTree,
   error: any
 } = {

@@ -20,7 +20,10 @@ export interface CategoryDB extends Category {
 
 export interface CategoryForm extends Omit<Category, 'createdAt' | 'deletedAt' | 'categoryId'>, Pick<Partial<Category>, 'categoryId'> {
 }
-export interface NewCategory extends CategoryForm{}
+
+export interface NewCategory extends CategoryForm {
+}
+
 export interface EditCategory extends CategoryForm {
 }
 

@@ -1,17 +1,17 @@
 <ng-container *ngIf="categoryForm">
-<form (submit)="onSubmit()" [formGroup]="categoryForm" class="p-3">
-  <div class="mb-3">
-    <label class="form-label" for="post-title">Nazwa kategorii</label>
-    <input class="form-control" formControlName="categoryName" id="post-title" placeholder="Wpisz nazwę" type="text">
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="category">Kategoria</label>
-    <select class="form-select" formControlName="categoryParent" id="category">
-      <option disabled selected value="">Wybierz kategorię</option>
-      <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}
-      </option>
-    </select>
-  </div>
-  <button class="btn btn-primary" type="submit">Dodaj post</button>
-</form>
+  <form (submit)="onSubmit()" [formGroup]="categoryForm" class="p-3">
+    <div class="mb-3">
+      <label class="form-label" for="post-title">Nazwa kategorii</label>
+      <input class="form-control" formControlName="categoryName" id="post-title" placeholder="Wpisz nazwę" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="category">Kategoria</label>
+      <select class="form-select" formControlName="categoryParent" id="category">
+        <option disabled selected value="">Wybierz kategorię</option>
+        <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Dodaj post</button>
+  </form>
 </ng-container>

@@ -9,7 +9,7 @@ import {CategoryEntity} from "../../entities/category.entity";
 export const getCategory = async (request: HttpRequest<void>): Promise<Response> => {
   try {
     const categoryRepo: CategoryRepository = getRepository(CategoryRepository, request.env);
-    const id: number = getQueryParam(request.params, 'id') as  number;
+    const id: number = getQueryParam(request.params, 'id') as number;
     const result: CategoryEntity = await categoryRepo.getById(id);
     return createResponse({body: result, code: OK_CODE});
   } catch (e) {

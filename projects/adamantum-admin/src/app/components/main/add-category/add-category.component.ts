@@ -5,7 +5,7 @@ import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoriesService} from "../../../services/categories.service";
 import {CategoryEditForm, categoryForm} from "../../../forms/category.form";
 import {Observable} from "rxjs";
-import {CategoryForm, NewCategory} from "shared-types";
+import {NewCategory} from "shared-types";
 import {CategoryFormComponent} from "../category-form/category-form.component";
 
 

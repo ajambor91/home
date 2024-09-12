@@ -1,12 +1,19 @@
 import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from "@angular/core";
-import {RoutesService} from "../../../../services/routes.service";
+import {PostsService} from "../../../../services/posts.service";
 import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ITreeNodeRoutes} from "../../../../models/route.model";
-import {Observable, switchMap, tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {CallbacksService} from "../../../../services/callbacks.service";
 import {Store} from "@ngrx/store";
-import {selectAllPosts} from "../../../../store/posts.selectors";
+import {PostsTree} from "../../../../../../../adamantum-shared-types";
+import {PostsTransformer} from "../../../../transformers/posts.transformer";
+import {ApiService} from "../../../../services/api.service";
+import {FORMATTERS_TOKEN} from "../../../../core/formatters.token";
+import {PostsFormatter} from "../../../../formatters/post-tree.formatter";
+import {Processor} from "../../../../core/processor";
+import {ParsedPostTree} from "../../../../models/posts-tree.model";
+import {IFormatInterface} from "../../../../core/formatter.interfaces";
 
 
 @Component({
@@ -14,7 +21,28 @@ import {selectAllPosts} from "../../../../store/posts.selectors";
   standalone: true,
   templateUrl: './routes.component.html',
   styleUrls: ['./routes.component.scss'],
-  providers: [RoutesService],
+  providers: [
+    {
+      provide: PostsService,
+      useFactory: (postsTransformer: PostsTransformer, router: Router, apiService: ApiService, store: Store) =>
+        new PostsService(router, apiService, postsTransformer, store),
+      deps: [PostsTransformer, Router, ApiService, Store],
+    },
+    {
+      provide: PostsTransformer,
+      useFactory: (processor: Processor<PostsTree, ParsedPostTree>) => new PostsTransformer(processor),
+      deps: [Processor<PostsTree, ParsedPostTree>]
+    },
+    {
+      provide: Processor,
+      useFactory: (formatters: Array<IFormatInterface<PostsTree, ParsedPostTree>>) => new Processor(formatters),
+      deps: [FORMATTERS_TOKEN]
+    },
+    {
+      provide: FORMATTERS_TOKEN,
+      useFactory: () => [new PostsFormatter()],
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   imports: [
@@ -33,13 +61,12 @@ export class RoutesComponent {
   @Input() public lastLoginDate!: string | null;
 
 
-  public routes$: Observable<ITreeNodeRoutes> = this.store.select(selectAllPosts).pipe(
-    tap(store => console.log(store)),
-    switchMap(() => this.routeService.getRoutes())
+  public routes$: Observable<ITreeNodeRoutes> = this.postsService.getPosts().pipe(
+    tap(store => console.log(store))
   );
 
 
-  constructor(private routeService: RoutesService, private callbackService: CallbacksService, private store: Store) {
+  constructor(private postsService: PostsService, private callbackService: CallbacksService, private store: Store) {
 
   }
 
