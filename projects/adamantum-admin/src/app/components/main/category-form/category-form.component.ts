@@ -19,6 +19,7 @@ import {Category, EditCategory, NewCategory} from "shared-types";
 
 })
 export class CategoryFormComponent {
+  @Input() public isParent: boolean = false;
   @Input() public categoryForm!: FormGroup<CategoryEditForm>;
   @Input() public categories$!: Observable<Category[]>;
   @Output() public onSubmitEmit: EventEmitter<EditCategory> = new EventEmitter<EditCategory | NewCategory>()

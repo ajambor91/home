@@ -47,6 +47,7 @@ export class FullPostFactory extends PostFactory {
       categoryName: data.categoryName || null,
       parentCategoryName: data.parentCategoryName || null,
       createdAt: new Date(data.createdAt),
+      categoryParentId: data.categoryParentId || null
     });
   }
 }

@@ -14,6 +14,7 @@ import {PostsFormatter} from "../../../../formatters/post-tree.formatter";
 import {Processor} from "../../../../core/processor";
 import {ParsedPostTree} from "../../../../models/posts-tree.model";
 import {IFormatInterface} from "../../../../core/formatter.interfaces";
+import {PostsApiService} from "../../../../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 
 
 @Component({
@@ -22,26 +23,6 @@ import {IFormatInterface} from "../../../../core/formatter.interfaces";
   templateUrl: './routes.component.html',
   styleUrls: ['./routes.component.scss'],
   providers: [
-    {
-      provide: PostsService,
-      useFactory: (postsTransformer: PostsTransformer, router: Router, apiService: ApiService, store: Store) =>
-        new PostsService(router, apiService, postsTransformer, store),
-      deps: [PostsTransformer, Router, ApiService, Store],
-    },
-    {
-      provide: PostsTransformer,
-      useFactory: (processor: Processor<PostsTree, ParsedPostTree>) => new PostsTransformer(processor),
-      deps: [Processor<PostsTree, ParsedPostTree>]
-    },
-    {
-      provide: Processor,
-      useFactory: (formatters: Array<IFormatInterface<PostsTree, ParsedPostTree>>) => new Processor(formatters),
-      deps: [FORMATTERS_TOKEN]
-    },
-    {
-      provide: FORMATTERS_TOKEN,
-      useFactory: () => [new PostsFormatter()],
-    }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 

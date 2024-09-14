@@ -6,6 +6,7 @@ export interface ParsedPostTree {
   categoryId: null | number;
   categoryName: string | null
   parentCategoryName: string | null;
+  categoryParentId: number | null;
   children?: ParsedPostTree[];
 }
 

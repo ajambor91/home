@@ -8,8 +8,7 @@ export abstract class TransformerAbstract<T, U> implements ISupportInterface<any
   }
 
   public support(item: any): boolean {
-    console.log('in suppoert', this.processor)
-    // return false;
+
     return this.processor.support(item);
   }
 

@@ -12,10 +12,6 @@ export class ApiService {
 
   }
 
-  public getRoutes(): Observable<PostsRoutes> {
-    return this.httpClient.get<PostsRoutes>(`${this._apiUrl}routes`);
-  }
-
   public getPost(): Observable<Posts> {
     return this.httpClient.get<Posts>(`${this._apiUrl}posts/xxx`)
   }

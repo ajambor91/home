@@ -1,20 +1,27 @@
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
-import {map, Observable, shareReplay} from "rxjs";
+import {map, Observable, shareReplay, take} from "rxjs";
 import {IRouteEx, IRoutesEx, ITreeNodeRoutes} from "../models/route.model";
 import {IApiRoutes} from "../models/api.model";
 import {GenericPostComponent} from "../components/main-page/generic-post/generic-post.component";
-import {PostRoute, PostsRoutes} from "shared-types";
+import {PostRoute, Posts, PostsRoutes, PostsTree, PostTree} from "shared-types";
 import {PostsTransformer} from "../transformers/posts.transformer";
 import {Store} from "@ngrx/store";
 import {selectAllPosts} from "../store/posts.selectors";
+import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
+import {PostsTreeClass} from "../classes/posts-tree.class";
 
 @Injectable()
 export class PostsService {
-  private _routes: Observable<IApiRoutes> = this.apiService.getRoutes().pipe(shareReplay())
+  // private _routes: Observable<IApiRoutes> = this.apiService.getRoutes().pipe(shareReplay())
 
-  constructor(private router: Router, private apiService: ApiService, private transformer: PostsTransformer, private store: Store) {
+  constructor(private router: Router, private transformer: PostsTransformer, private store: Store, private _postsApi: PostsApiService) {
+  }
+
+
+  public getPostsTree$(): Observable<PostsTree> {
+    return this._postsApi.getPostsTree$().pipe(map(posts => posts.map<PostTree>(post => new PostsTreeClass(post.categoryId, post.categoryName, post.createdA, post.fullPath, post.parentCategoryName, post.postId, post.postTitle, post.categoryParentId))));
   }
 
   public getPosts(): Observable<ITreeNodeRoutes> {

@@ -14,6 +14,7 @@ export class PostsService {
   constructor(private _api: ApiService, private _postsApi: PostsApiService) {
   }
 
+
   public getPosts$(): Observable<Posts> {
     return this._postsApi.getPosts$().pipe(take(1));
   }
@@ -34,9 +35,5 @@ export class PostsService {
     this._api.getPost(id).subscribe(result => {
       form.patchValue(result);
     });
-  }
-
-  public getPostsTree$(): Observable<PostsTree> {
-    return this._postsApi.getPostsTree$().pipe(map(posts => posts.map<PostTree>(post => new PostsTreeClass(post.categoryId, post.categoryName, post.createdA, post.fullPath, post.parentCategoryName, post.postId, post.postTitle))));
   }
 }

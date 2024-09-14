@@ -1,9 +1,10 @@
 import {loadPosts, loadPostsFailure, loadPostsSuccess} from "./posts.actions";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {PostsService} from "../../../../adamantum-admin/src/app/services/posts.service";
+
 import {catchError, map, mergeMap, tap} from "rxjs";
 import {inject} from "@angular/core";
 import {PostsTree} from "../../../../adamantum-shared-types";
+import {PostsService} from "../services/posts.service";
 
 export const loadPostsEffect = createEffect(
   (actions$: Actions = inject(Actions), postsService: PostsService = inject(PostsService)) => {

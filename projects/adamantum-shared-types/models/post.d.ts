@@ -16,6 +16,7 @@ export interface PostDB extends Post {
   deletedAt?: Date | null
   categoryName?: string | null
   parentCategoryName?: string | null,
+  categoryParentId?: number | null
 }
 
 export interface NewPost extends Omit<Post, 'postId' | 'deletedAt' | 'createdAt'>, Partial<Pick<Post, 'categoryId' | 'fullPath'>> {
@@ -45,7 +46,8 @@ export interface PostTree {
   fullPath: string;
   categoryId: null | number;
   categoryName: string | null
-  parentCategoryName: string | null
+  parentCategoryName: string | null;
+  categoryParentId: number | null;
 }
 
 export interface PostsTree extends Array<PostTree> {
