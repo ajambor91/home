@@ -12,7 +12,7 @@ export abstract class TransformerAbstract<T, U> implements ISupportInterface<any
     return this.processor.support(item);
   }
 
-  public transform(input: T): T | U | null {
+  public transform(input: T): U[] | null {
     if (this.support(input)) {
       return this.processor.process(input);
     }

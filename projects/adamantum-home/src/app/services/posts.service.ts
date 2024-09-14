@@ -11,6 +11,7 @@ import {Store} from "@ngrx/store";
 import {selectAllPosts} from "../store/posts.selectors";
 import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 import {PostsTreeClass} from "../classes/posts-tree.class";
+import {ParsedPostTree} from "../models/posts-tree.model";
 
 @Injectable()
 export class PostsService {
@@ -24,10 +25,9 @@ export class PostsService {
     return this._postsApi.getPostsTree$().pipe(map(posts => posts.map<PostTree>(post => new PostsTreeClass(post.categoryId, post.categoryName, post.createdA, post.fullPath, post.parentCategoryName, post.postId, post.postTitle, post.categoryParentId))));
   }
 
-  public getPosts(): Observable<ITreeNodeRoutes> {
+  public getPosts(): Observable<ParsedPostTree[] | null> {
     return this.store.select(selectAllPosts).pipe(
       map(res => this.transformer.transform(res)),
-      map(() => ({} as ITreeNodeRoutes))
     )
   }
 

@@ -10,7 +10,6 @@ import {Processor} from "../core/processor";
 export class PostsTransformer extends TransformerAbstract<PostsTree, ParsedPostTree> {
   constructor(protected override processor: Processor<PostsTree, ParsedPostTree>) {
     super(processor);
-    console.log('child, proces', processor)
   }
 
 }

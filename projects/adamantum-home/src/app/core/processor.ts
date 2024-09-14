@@ -9,15 +9,14 @@ export class Processor<T, U> implements ISupportInterface<T> {
   }
 
   public support(item: T): boolean {
-    console.log('Processor', this.formatters)
     return this.formatters.some(formatter => formatter.support(item));
   }
 
-  public process(item: T): U | T {
+  public process(item: T): U []| null{
     const formatter = this.formatters.find(formatter => formatter.support(item));
     if (formatter) {
       return formatter.format(item);
     }
-    return item;
+    return null;
   }
 }

@@ -10,7 +10,6 @@ export const loadPostsEffect = createEffect(
   (actions$: Actions = inject(Actions), postsService: PostsService = inject(PostsService)) => {
     return actions$.pipe(
       ofType(loadPosts),
-      tap(x => console.log(x)),
       mergeMap(() => postsService.getPostsTree$().pipe(
         map((posts: PostsTree) => loadPostsSuccess({posts})),
         catchError(error => [loadPostsFailure({error})])

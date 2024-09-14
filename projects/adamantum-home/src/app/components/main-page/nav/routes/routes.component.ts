@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from "@angular/core";
 import {PostsService} from "../../../../services/posts.service";
-import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf, NgSwitch, NgTemplateOutlet} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {ITreeNodeRoutes} from "../../../../models/route.model";
 import {Observable, tap} from "rxjs";
@@ -32,7 +32,9 @@ import {PostsApiService} from "../../../../../../../adamantum-api-reqs/src/lib/p
     AsyncPipe,
     NgIf,
     JsonPipe,
-    NgClass
+    NgClass,
+    NgSwitch,
+    NgTemplateOutlet
   ]
 })
 export class RoutesComponent {
@@ -42,9 +44,7 @@ export class RoutesComponent {
   @Input() public lastLoginDate!: string | null;
 
 
-  public routes$: Observable<ITreeNodeRoutes> = this.postsService.getPosts().pipe(
-    tap(store => console.log(store))
-  );
+  public routes$: Observable<ParsedPostTree[] | null> = this.postsService.getPosts();
 
 
   constructor(private postsService: PostsService, private callbackService: CallbacksService, private store: Store) {
