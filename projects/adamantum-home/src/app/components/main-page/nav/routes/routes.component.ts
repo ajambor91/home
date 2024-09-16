@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {CallbacksService} from "../../../../services/callbacks.service";
 import {Store} from "@ngrx/store";
 import {ParsedPostTree} from "../../../../models/posts-tree.model";
+import {RoutePathHelper} from "../../../../helpers/route-path.helper";
 
 
 @Component({
@@ -32,7 +33,7 @@ export class RoutesComponent {
 
 
   @Input() public lastLoginDate!: string | null;
-
+  public RoutePathHelper: typeof RoutePathHelper = RoutePathHelper;
 
   public routes$: Observable<ParsedPostTree[] | null> = this.postsService.getPosts$();
 
@@ -41,15 +42,7 @@ export class RoutesComponent {
 
   }
 
-  public createLink(item: ParsedPostTree): string {
-    if (!!item.categoryParentId) {
-      return `/article/${item.parentCategoryName}/${item.categoryName}/${item.postTitle}`;
-    } else if (!!item.categoryId) {
-      return `/article/${item.categoryName}/${item.postTitle}`
-    } else {
-      return `/article/${item.postTitle}`
-    }
-  }
+
 
   public selectAndPassComponent(route: ParsedPostTree): void {
     this.callbackService.setArticleComponentCallback(route);

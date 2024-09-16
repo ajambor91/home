@@ -12,6 +12,7 @@ export class CallbacksService {
 
   private _componentCreatedCallback: Subject<void> = new Subject();
 
+  private _commandCallback: Subject<void> = new Subject();
   public get componentCreatedCallback(): Observable<void> {
     return this._componentCreatedCallback.asObservable();
   }
@@ -34,6 +35,10 @@ export class CallbacksService {
     return this._commandOutputComponentCallback.asObservable();
   }
 
+  public get commandCallback(): Observable<void> {
+    return this._commandCallback.asObservable();
+  }
+
   public setIntrussionFinalCallback(): void {
     this._intrussionFinalCallback.next();
   }
@@ -52,6 +57,10 @@ export class CallbacksService {
 
   public setComponentCreatedCallback(): void {
     this._componentCreatedCallback.next();
+  }
+
+  public setCommandCallback(): void {
+    this._commandCallback.next();
   }
 
   public createCallback<T>(): Subject<T> {

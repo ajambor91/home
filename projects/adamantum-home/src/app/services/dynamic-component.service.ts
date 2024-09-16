@@ -1,5 +1,5 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from "@angular/core";
-import {Observable, Subscription, switchMap, take} from "rxjs";
+import {concatMap, forkJoin, map, Observable, Subscription, switchMap, take} from "rxjs";
 import {CommandBlockComponent} from "../components/intrusion/command-block/command-block.component";
 import {CommandOutputComponent} from "../components/intrusion/command-output/command-output.component";
 import {CommandComponent} from "../components/intrusion/command/command.component";
@@ -113,7 +113,12 @@ export class DynamicComponentService {
 
 
   public addArticleComponent(container: ViewContainerRef, route: ParsedPostTree): void {
-    this.postsService.getPostFromStore$(route).pipe(take(1)).subscribe(postData => {
+    this.postsService.getPostFromStore$(route).pipe(
+      take(1),
+      concatMap((postData) => this.callbacksService.commandCallback.pipe(
+        take(1),
+        map(() => postData)))
+    ).subscribe(postData => {
       const componentRef: ComponentRef<any> = container.createComponent(GenericPostComponent as Type<any>);
       componentRef.instance.updateContent(postData);
 

@@ -20,7 +20,7 @@
             </ul>
           </ng-container>
           <ng-container *ngIf="!route.categoryId && !route.categoryParentId">
-            <a (click)="selectAndPassComponent(route)" [routerLink]="createLink(route)"
+            <a (click)="selectAndPassComponent(route)" [routerLink]="RoutePathHelper.createPath(route)"
                class="directory__link">{{ route.postTitle }}</a>
           </ng-container>
         </li>
@@ -42,7 +42,7 @@
           </ul>
         </ng-container>
         <ng-container *ngIf="!child.children || child.children.length === 0">
-          <a (click)="selectAndPassComponent(child)" [routerLink]="createLink(child)" [state]="{item: child}"
+          <a (click)="selectAndPassComponent(child)" [routerLink]="RoutePathHelper.createPath(child)" [state]="{item: child}"
              class="directory__link">{{ child.postTitle }}</a>
         </ng-container>
       </li>
