@@ -24,7 +24,10 @@ export interface CategoryForm extends Omit<Category, 'createdAt' | 'deletedAt' |
 export interface ParentCategoryForm extends Omit<CategoryForm, 'categoryName'> {
   categoryParentId?: number | null;
 }
-export interface NewCategory extends ParentCategoryForm {}
+
+export interface NewCategory extends ParentCategoryForm {
+}
+
 export interface NewCategory extends CategoryForm {
 }
 

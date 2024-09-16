@@ -7,7 +7,6 @@ import {provideHttpClient, withFetch} from "@angular/common/http";
 import {provideStore} from "@ngrx/store";
 import {postReducer} from "./store/posts.reducer";
 import {provideEffects} from "@ngrx/effects";
-import * as loadPostsEffect from "./store/posts.effect";
 import {PostsService} from "./services/posts.service";
 import {PostsTransformer} from "./transformers/posts.transformer";
 import {Processor} from "./core/processor";
@@ -16,6 +15,7 @@ import {ParsedPostTree} from "./models/posts-tree.model";
 import {IFormatInterface} from "./core/formatter.interfaces";
 import {FORMATTERS_TOKEN} from "./core/formatters.token";
 import {PostsFormatter} from "./formatters/post-tree.formatter";
+import {loadPostContentEffect, loadPostsEffect} from "./store/posts.effect";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +26,10 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       posts: postReducer
     }),
-    provideEffects([loadPostsEffect]),
+    provideEffects({
+      loadPostsEffect,
+      loadPostContentEffect
+    }),
     PostsService,
     {
       provide: PostsTransformer,

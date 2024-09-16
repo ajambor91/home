@@ -11,7 +11,9 @@ import {MainPageComponent} from "../components/main-page/main-page.component";
 import {CallbacksService} from "./callbacks.service";
 import {NavComponent} from "../components/main-page/nav/nav.component";
 import {RoutesComponent} from "../components/main-page/nav/routes/routes.component";
-import {IRouteEx} from "../app.routes";
+import {GenericPostComponent} from "../components/main-page/generic-post/generic-post.component";
+import {ParsedPostTree} from "../models/posts-tree.model";
+import {PostsService} from "./posts.service";
 
 @Injectable()
 export class DynamicComponentService {
@@ -20,7 +22,8 @@ export class DynamicComponentService {
 
   constructor(
     private localDataService: LocalDataService,
-    private callbacksService: CallbacksService
+    private callbacksService: CallbacksService,
+    private postsService: PostsService
   ) {
   }
 
@@ -109,8 +112,13 @@ export class DynamicComponentService {
   }
 
 
-  public addGenericComponent(container: ViewContainerRef, route: IRouteEx): void {
-    const componentRef: ComponentRef<any> = container.createComponent(route.component as Type<any>);
-    // this.callbacksService.setGenericComponentCallback(route);
+  public addArticleComponent(container: ViewContainerRef, route: ParsedPostTree): void {
+    this.postsService.getPostFromStore$(route).pipe(take(1)).subscribe(postData => {
+      const componentRef: ComponentRef<any> = container.createComponent(GenericPostComponent as Type<any>);
+      componentRef.instance.updateContent(postData);
+
+      // this.callbacksService.setGenericComponentCallback(route);
+    })
+
   }
 }

@@ -2,7 +2,7 @@ import {inject, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {EnvironmentsService} from "./environments.service";
-import {Posts, PostsRoutes} from "shared-types";
+import {Posts} from "shared-types";
 
 @Injectable()
 export class ApiService {

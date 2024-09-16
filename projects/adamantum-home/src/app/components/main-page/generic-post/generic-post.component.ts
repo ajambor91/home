@@ -1,10 +1,10 @@
 import {RouterModule} from "@angular/router";
-import {ChangeDetectionStrategy, Component} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from "@angular/core";
 import {GreetingComponentComponent} from "../greeting-component/greeting-component.component";
 import {InputComponent} from "../../generic/input/input.component";
-import {Observable} from "rxjs";
-import {ApiService} from "../../../services/api.service";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
+import {PostEntity} from "../../../../../../adamantum-shared-types";
+import {CallbacksService} from "../../../services/callbacks.service";
 
 
 @Component({
@@ -12,20 +12,27 @@ import {AsyncPipe, NgIf} from "@angular/common";
   standalone: true,
   templateUrl: './generic-post.component.html',
   styleUrls: ['./generic-post.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 
   imports: [
     GreetingComponentComponent,
     InputComponent,
     RouterModule,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    JsonPipe
   ]
 })
 export class GenericPostComponent {
-  public post$: Observable<any> = this.apiService.getPost();
+  public post!: PostEntity;
 
-  constructor(private apiService: ApiService) {
+  constructor(private _cdr: ChangeDetectorRef, private _callbackService: CallbacksService) {
+  }
+
+  public updateContent(content: PostEntity): void {
+    this.post = content;
+    this._cdr.detectChanges();
+    this._callbackService.setComponentCreatedCallback();
   }
 
 }

@@ -15,7 +15,8 @@ export class PostEntity extends EntityClass {
   deletedAt?: Date | null;
   categoryName?: string | null;
   parentCategoryName?: string | null;
-  categoryParentId? : number | null;
+  categoryParentId?: number | null;
+
   constructor(dto: PostDTO) {
     super();
     this.postId = dto.postId;

@@ -19,17 +19,47 @@
 
   &__item, &__subitem {
     position: relative;
-    padding-left: 1.2rem;
+    padding-left: 10px;
+  }
 
+  .tree-branch {
     &:before {
       content: '├──';
       position: absolute;
       left: -1rem;
       top: 0;
     }
+  }
 
-    &:last-child:before {
+  // Ostatni element drzewa
+  .tree-last {
+    &:before {
       content: '└──';
+      position: absolute;
+      left: -1rem;
+      top: 0;
+    }
+
+    // Usunięcie pionowej linii po ostatnim elemencie listy
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: auto;
+      left: 14px;
+      border-left: 2px solid transparent; // Usuwa linię na końcu
+      height: 100%;
+    }
+
+    // Usunięcie pionowej linii z ostatniego elementu
+    &:before {
+      border-left: none;
+    }
+
+    // Poprawiamy linię pionową dla ostatniego elementu
+    & + li:before {
+      content: '';
+      border-left: 2px solid transparent;
     }
   }
 
@@ -37,6 +67,7 @@
     text-decoration: none;
     color: #00ff00;
     transition: color 0.3s;
+    padding-left: 10px;
 
     &:hover {
       text-decoration: underline;

@@ -12,7 +12,7 @@ export class Processor<T, U> implements ISupportInterface<T> {
     return this.formatters.some(formatter => formatter.support(item));
   }
 
-  public process(item: T): U []| null{
+  public process(item: T): U [] | null {
     const formatter = this.formatters.find(formatter => formatter.support(item));
     if (formatter) {
       return formatter.format(item);

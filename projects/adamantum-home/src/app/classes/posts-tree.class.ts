@@ -1,4 +1,4 @@
-import { PostTree } from "shared-types";
+import {PostTree} from "shared-types";
 
 export class PostsTreeClass implements PostTree {
   public categoryId: number | null;

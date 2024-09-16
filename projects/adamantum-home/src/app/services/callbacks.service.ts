@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, Subject} from "rxjs";
-import {IRouteEx} from "../app.routes";
+import {ParsedPostTree} from "../models/posts-tree.model";
 
 @Injectable()
 export class CallbacksService {
@@ -10,10 +10,16 @@ export class CallbacksService {
     return this._intrussionFinalCallback.asObservable();
   }
 
-  private _genericComponentCallback: Subject<IRouteEx> = new Subject();
+  private _componentCreatedCallback: Subject<void> = new Subject();
 
-  public get genericComponentCallback(): Observable<IRouteEx> {
-    return this._genericComponentCallback.asObservable();
+  public get componentCreatedCallback(): Observable<void> {
+    return this._componentCreatedCallback.asObservable();
+  }
+
+  private _articleComponentCallback: Subject<ParsedPostTree> = new Subject();
+
+  public get articleComponentCallback(): Observable<ParsedPostTree> {
+    return this._articleComponentCallback.asObservable();
   }
 
   private _commandComponentCallback: Subject<void> = new Subject();
@@ -32,8 +38,8 @@ export class CallbacksService {
     this._intrussionFinalCallback.next();
   }
 
-  public setGenericComponentCallback(value: IRouteEx): void {
-    this._genericComponentCallback.next(value);
+  public setArticleComponentCallback(value: ParsedPostTree): void {
+    this._articleComponentCallback.next(value);
   }
 
   public setCommandComponentCallback(): void {
@@ -42,6 +48,10 @@ export class CallbacksService {
 
   public setCommandOutputComponentCallback(): void {
     this._commandOutputComponentCallback.next();
+  }
+
+  public setComponentCreatedCallback(): void {
+    this._componentCreatedCallback.next();
   }
 
   public createCallback<T>(): Subject<T> {

@@ -14,7 +14,8 @@ import {GreetingComponentComponent} from "./greeting-component/greeting-componen
 import {InputComponent} from "../generic/input/input.component";
 import {Router, RouterModule} from "@angular/router";
 import {CallbacksService} from "../../services/callbacks.service";
-import {IRouteEx} from "../../app.routes";
+import {ParsedPostTree} from "../../models/posts-tree.model";
+import {switchMap, tap} from "rxjs";
 
 @Component({
   selector: 'app-main-page',
@@ -43,7 +44,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.addGenericComponent();
+    this.addArticleComponent();
     this.updateTime();
   }
 
@@ -53,6 +54,16 @@ export class MainPageComponent implements OnInit, AfterViewInit {
       this.dynamicComponentService.createNav(this.navContainer)
     }, 200)
 
+  }
+
+  public createLink(item: ParsedPostTree): string {
+    if (!!item.categoryParentId) {
+      return `/article/${item.parentCategoryName}/${item.categoryName}/${item.postTitle}`;
+    } else if (!!item.categoryId) {
+      return `/article/${item.categoryName}/${item.postTitle}`
+    } else {
+      return `/article/${item.postTitle}`
+    }
   }
 
   private getLastLoginDate(): void {
@@ -76,10 +87,14 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
-  private addGenericComponent(): void {
-    this.callbackService.genericComponentCallback.subscribe((res: IRouteEx) => {
-      this.dynamicComponentService.addGenericComponent(this.navContainer, res);
-      this.router.navigate([res.path], {replaceUrl: true});
+  private addArticleComponent(): void {
+    this.callbackService.articleComponentCallback.pipe(
+      tap((article: ParsedPostTree) => {
+        this.dynamicComponentService.addArticleComponent(this.navContainer, article);
+        this.router.navigate([this.createLink(article)], {replaceUrl: true});
+      }),
+      switchMap(() => this.callbackService.componentCreatedCallback)
+    ).subscribe(() => {
       this.dynamicComponentService.createNav(this.navContainer)
     });
   }
