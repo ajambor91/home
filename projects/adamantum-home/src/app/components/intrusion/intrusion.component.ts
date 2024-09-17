@@ -12,16 +12,16 @@ import {DynamicComponentService} from "../../services/dynamic-component.service"
 })
 export class IntrusionComponent implements AfterViewInit {
 
-  @ViewChild('commandContainer', {read: ViewContainerRef}) private commandContainer!: ViewContainerRef;
+  @ViewChild('commandContainer', {read: ViewContainerRef}) private _commandContainer!: ViewContainerRef;
 
-  constructor(private dynamicComponentService: DynamicComponentService) {
+  constructor(private _dynamicComponentService: DynamicComponentService) {
   }
 
   public ngAfterViewInit(): void {
-    this.createCommandBlock();
+    this._createCommandBlock();
   }
 
-  private createCommandBlock(index: number = 0): void {
-    this.dynamicComponentService.createCommandBlockComponent(index, this.commandContainer);
+  private _createCommandBlock(index: number = 0): void {
+    this._dynamicComponentService.createCommandBlockComponent(index, this._commandContainer);
   }
 }

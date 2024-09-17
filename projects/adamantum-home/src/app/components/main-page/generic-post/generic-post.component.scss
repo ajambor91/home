@@ -1,0 +1,50 @@
+$line-color: #ffffff;
+$line-height: 2px;
+$line-dash-length: 20px;
+$line-dash-gap: 5px;
+$title-line-height: 2.4em;
+$content-line-height: calc($title-line-height / 2);
+
+@mixin dashed-line($position) {
+  content: "";
+  position: absolute;
+  #{$position}: 0;
+  left: 0;
+  width: 100%;
+  height: $line-height;
+  background-image: linear-gradient(to right, $line-color 30%, rgba(255, 255, 255, 0) 0%);
+  background-size: $line-dash-length $line-dash-gap;
+  background-repeat: repeat-x;
+}
+
+.article {
+  font-size: 1.7em;
+
+  &__title {
+    text-align: center;
+    margin: 0.5em 0;
+    line-height: $title-line-height;
+    position: relative;
+
+    &::before {
+      @include dashed-line(top);
+    }
+
+    &::after {
+      @include dashed-line(bottom);
+    }
+  }
+
+  &__content {
+    margin: 1em 0;
+    font-size: 0.55em;
+    font-weight: normal;
+    padding-bottom: 1.2em;
+    line-height: $content-line-height; // Zmienna dla czytelności
+    position: relative;
+
+    &::after {
+      @include dashed-line(bottom);
+    }
+  }
+}

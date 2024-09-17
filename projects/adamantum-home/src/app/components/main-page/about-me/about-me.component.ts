@@ -8,6 +8,7 @@ import {ChangeDetectionStrategy, Component, Input,} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
+// TODO: Write a detailed self-description for the About Me section
 export class AboutMeComponent {
 
   @Input() public lastLoginDate!: string | null;

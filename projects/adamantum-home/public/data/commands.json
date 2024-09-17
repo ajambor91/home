@@ -2,7 +2,7 @@
   {
     "inputs": {
       "command": [
-        "> ping -c 4 adamjambor.com"
+        "$ ping -c 4 adamjambor.com"
       ],
       "output": [
         "PING adamjambor.com (192.168.1.1): 56 data bytes\n",
@@ -18,7 +18,7 @@
   {
     "inputs": {
       "command": [
-        "> nmap -p 1-65535 -T4 target.website.com\n"
+        "$ nmap -p 1-65535 -T4 target.website.com\n"
       ],
       "output": [
         "Starting Nmap 7.80 ( https://nmap.org ) at 2024-09-03 12:34 UTC\n",

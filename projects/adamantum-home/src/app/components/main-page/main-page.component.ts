@@ -16,6 +16,7 @@ import {Router, RouterModule} from "@angular/router";
 import {CallbacksService} from "../../services/callbacks.service";
 import {ParsedPostTree} from "../../models/posts-tree.model";
 import {switchMap, tap} from "rxjs";
+import {RoutePathHelper} from "../../helpers/route-path.helper";
 
 @Component({
   selector: 'app-main-page',
@@ -24,7 +25,6 @@ import {switchMap, tap} from "rxjs";
   providers: [GreetingsService],
   styleUrls: ['./main-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   imports: [
     GreetingComponentComponent,
     InputComponent,
@@ -33,70 +33,71 @@ import {switchMap, tap} from "rxjs";
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
   public currentTime!: string;
-  @ViewChild('navContainer', {read: ViewContainerRef}) private navContainer!: ViewContainerRef;
+  private _RoutePathHelper: typeof RoutePathHelper = RoutePathHelper;
 
-  constructor(private zone: NgZone, private greetingsService: GreetingsService, private dynamicComponentService: DynamicComponentService, private callbackService: CallbacksService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(
+    private _zone: NgZone,
+    private _greetingsService: GreetingsService,
+    private _dynamicComponentService: DynamicComponentService,
+    private _callbackService: CallbacksService,
+    private _router: Router,
+    private _cdr: ChangeDetectorRef
+  ) {
+  }
 
+  private _navContainer!: ViewContainerRef;
+
+  @ViewChild('navContainer', {read: ViewContainerRef})
+  public set navContainer(vcr: ViewContainerRef) {
+    this._navContainer = vcr;
   }
 
   public get lastLoginDate(): string | null {
-    return this.greetingsService.getLastLogin();
+    return this._greetingsService.getLastLogin();
   }
 
-  ngOnInit(): void {
-    this.addArticleComponent();
-    this.updateTime();
+  public ngOnInit(): void {
+    this._addArticleComponent();
+    this._updateTime();
   }
 
-  ngAfterViewInit() {
-    this.getLastLoginDate();
+  public ngAfterViewInit(): void {
+    this._getLastLoginDate();
     setTimeout(() => {
-      this.dynamicComponentService.createNav(this.navContainer)
-    }, 200)
-
+      this._dynamicComponentService.createNav(this._navContainer);
+    }, 200);
   }
 
-  public createLink(item: ParsedPostTree): string {
-    if (!!item.categoryParentId) {
-      return `/article/${item.parentCategoryName}/${item.categoryName}/${item.postTitle}`;
-    } else if (!!item.categoryId) {
-      return `/article/${item.categoryName}/${item.postTitle}`
-    } else {
-      return `/article/${item.postTitle}`
-    }
+  private _getLastLoginDate(): void {
+    this._greetingsService.setLoginDate();
   }
 
-  private getLastLoginDate(): void {
-    this.greetingsService.setLoginDate();
-  }
-
-  private updateTime(): void {
-    this.zone.runOutsideAngular(() => {
-      this.setTime();
+  private _updateTime(): void {
+    this._zone.runOutsideAngular(() => {
+      this._setTime();
       setInterval(() => {
-        this.zone.run(() => {
-          this.setTime();
+        this._zone.run(() => {
+          this._setTime();
         });
       }, 1000);
     });
   }
 
-  private setTime(): void {
+  private _setTime(): void {
     const now = new Date();
     this.currentTime = now.toLocaleTimeString('en-GB', {hour12: false});
-    this.cdr.detectChanges();
+    this._cdr.detectChanges();
   }
 
-  private addArticleComponent(): void {
-    this.callbackService.articleComponentCallback.pipe(
+  private _addArticleComponent(): void {
+    this._callbackService.articleComponentCallback.pipe(
       tap((article: ParsedPostTree) => {
-        this.dynamicComponentService.addArticleComponent(this.navContainer, article);
-        this.router.navigate([this.createLink(article)], {replaceUrl: true});
+        this._dynamicComponentService.addArticleComponent(this._navContainer, article);
+        this._router.navigate([this._RoutePathHelper.createPath(article)], {replaceUrl: true});
       }),
-      switchMap(() => this.callbackService.componentCreatedCallback)
+      switchMap(() => this._callbackService.componentCreatedCallback)
     ).subscribe(() => {
-      this.dynamicComponentService.createNav(this.navContainer)
+      this._dynamicComponentService.createNav(this._navContainer);
     });
   }
-
 }

@@ -5,8 +5,9 @@ import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/ht
 import {authInterceptor} from "./interceptors/auth.interceptor";
 import {provideStore} from '@ngrx/store';
 import {provideEffects} from '@ngrx/effects';
+import { provideRouterStore } from '@ngrx/router-store';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({eventCoalescing: true}), provideRouter(routes), provideHttpClient(withFetch(), withInterceptors([authInterceptor])), provideStore(), provideEffects()],
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(withFetch(), withInterceptors([authInterceptor])), provideStore(), provideEffects(), provideRouterStore()],
 
 };

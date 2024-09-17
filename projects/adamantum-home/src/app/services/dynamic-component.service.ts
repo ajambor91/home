@@ -1,5 +1,5 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from "@angular/core";
-import {concatMap, forkJoin, map, Observable, Subscription, switchMap, take} from "rxjs";
+import {concatMap, filter, map, Observable, Subscription, switchMap, take, tap} from "rxjs";
 import {CommandBlockComponent} from "../components/intrusion/command-block/command-block.component";
 import {CommandOutputComponent} from "../components/intrusion/command-output/command-output.component";
 import {CommandComponent} from "../components/intrusion/command/command.component";
@@ -17,27 +17,25 @@ import {PostsService} from "./posts.service";
 
 @Injectable()
 export class DynamicComponentService {
-  private intrussionSubs: Subscription = new Subscription();
+  private _intrussionSubs: Subscription = new Subscription();
   private _isLastCommand: boolean = false;
 
   constructor(
-    private localDataService: LocalDataService,
-    private callbacksService: CallbacksService,
-    private postsService: PostsService
+    private _localDataService: LocalDataService,
+    private _callbacksService: CallbacksService,
+    private _postsService: PostsService
   ) {
   }
-
 
   public createCommandComponent(container: ViewContainerRef, component: Type<CommandComponent>, input: any): Observable<void> {
     const componentRef: ComponentRef<CommandComponent> = container.createComponent(component);
     componentRef.instance.input = input;
 
-    return this.callbacksService.commandComponentCallback.pipe(take(1));
+    return this._callbacksService.commandComponentCallback.pipe(take(1));
   }
 
-
   public createCommandBlockComponent(index: number, container: ViewContainerRef): void {
-    this.localDataService.getData(ELocalDataEnum.COMMANDS).pipe(
+    this._localDataService.getData(ELocalDataEnum.COMMANDS).pipe(
       switchMap((commands: ICommandComponentsData[]) => {
         if (index >= commands.length) {
           this._isLastCommand = true;
@@ -51,8 +49,8 @@ export class DynamicComponentService {
 
         const newIndex: number = index + 1;
 
-        const sub: Subscription = this.callbacksService.commandComponentCallback.subscribe(() => this.createCommandBlockComponent(newIndex, container));
-        this.intrussionSubs.add(sub);
+        const sub: Subscription = this._callbacksService.commandComponentCallback.subscribe(() => this.createCommandBlockComponent(newIndex, container));
+        this._intrussionSubs.add(sub);
 
         return new Observable<void>(observer => observer.complete());
       })
@@ -69,7 +67,7 @@ export class DynamicComponentService {
       const outputCreationInterval = setInterval(() => {
         if (i >= outputs.length) {
           if (this._isLastCommand === true) {
-            this.callbacksService.setIntrussionFinalCallback();
+            this._callbacksService.setIntrussionFinalCallback();
           }
           clearInterval(outputCreationInterval);
           observer.next();
@@ -79,26 +77,21 @@ export class DynamicComponentService {
           componentRef.instance.input = outputs[i];
 
           i++;
-          const sub: Subscription = this.callbacksService.commandOutputComponentCallback.pipe(take(1)).subscribe();
-          this.intrussionSubs.add(sub);
         }
       }, 100);
     });
   }
 
-
   public createIntrusion(container: ViewContainerRef): void {
     container.createComponent(IntrusionComponent);
   }
-
 
   public createMainPage(container: ViewContainerRef): void {
     container.createComponent(MainPageComponent);
   }
 
-
   public destroyIntrussion(container: ViewContainerRef): void {
-    this.intrussionSubs.unsubscribe();
+    this._intrussionSubs.unsubscribe();
     container.clear();
   }
 
@@ -106,24 +99,27 @@ export class DynamicComponentService {
     container.createComponent(NavComponent);
   }
 
-
   public createRoutes(container: ViewContainerRef): void {
     container.createComponent(RoutesComponent);
   }
 
-
   public addArticleComponent(container: ViewContainerRef, route: ParsedPostTree): void {
-    this.postsService.getPostFromStore$(route).pipe(
+    this._postsService.getPostFromStore$(route).pipe(
       take(1),
-      concatMap((postData) => this.callbacksService.commandCallback.pipe(
+      concatMap((postData) => this._callbacksService.commandCallback.pipe(
         take(1),
         map(() => postData)))
     ).subscribe(postData => {
       const componentRef: ComponentRef<any> = container.createComponent(GenericPostComponent as Type<any>);
       componentRef.instance.updateContent(postData);
+    });
+  }
 
-      // this.callbacksService.setGenericComponentCallback(route);
-    })
-
+  public routeByURL(): void {
+    this._callbacksService.isViaRouteSignal.pipe(
+      take(1),
+      filter(route => !!route),
+      tap(() => this._callbacksService.setIsViaRouteSignal(null))
+    ).subscribe(post => this._callbacksService.setArticleComponentCallback(post as ParsedPostTree));
   }
 }

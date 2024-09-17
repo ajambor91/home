@@ -10,7 +10,7 @@ export class PostsFormatter implements ISupportInterface<any>, IFormatInterface<
 
   public format(data: PostsTree): ParsedPostTree[] {
 
-    const parsedPosts: ParsedPostTree[] = this.parsePosts(data)
+    const parsedPosts: ParsedPostTree[] = this._parsePosts(data)
     return parsedPosts;
   }
 
@@ -19,7 +19,8 @@ export class PostsFormatter implements ISupportInterface<any>, IFormatInterface<
     return Array.isArray(item) && item.every(item => item instanceof PostsTreeClass);
   }
 
-  private parsePosts(data: PostsTree): ParsedPostTree[] {
+  // TODO: Investigate and optimize performance if necessary
+  private _parsePosts(data: PostsTree): ParsedPostTree[] {
     const arr: ParsedPostTree[] = [];
     for (let i: number = 0; i < data.length; i++) {
       const item: ParsedPostTree = {...data[i], children: []};

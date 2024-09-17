@@ -1,20 +1,33 @@
 import {Injectable} from "@angular/core";
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {ParsedPostTree} from "../models/posts-tree.model";
 
 @Injectable()
 export class CallbacksService {
+  // Private variables
   private _intrussionFinalCallback: Subject<void> = new Subject();
 
+  // Public getters
   public get intrussionFinalCallback(): Observable<void> {
     return this._intrussionFinalCallback.asObservable();
   }
 
+  private _isViaRouteSignal: BehaviorSubject<ParsedPostTree | null | undefined> = new BehaviorSubject<ParsedPostTree | null | undefined>(undefined);
+
+  public get isViaRouteSignal(): Observable<ParsedPostTree | null | undefined> {
+    return this._isViaRouteSignal.asObservable();
+  }
+
   private _componentCreatedCallback: Subject<void> = new Subject();
 
-  private _commandCallback: Subject<void> = new Subject();
   public get componentCreatedCallback(): Observable<void> {
     return this._componentCreatedCallback.asObservable();
+  }
+
+  private _commandCallback: Subject<void> = new Subject();
+
+  public get commandCallback(): Observable<void> {
+    return this._commandCallback.asObservable();
   }
 
   private _articleComponentCallback: Subject<ParsedPostTree> = new Subject();
@@ -35,10 +48,7 @@ export class CallbacksService {
     return this._commandOutputComponentCallback.asObservable();
   }
 
-  public get commandCallback(): Observable<void> {
-    return this._commandCallback.asObservable();
-  }
-
+  // Public methods
   public setIntrussionFinalCallback(): void {
     this._intrussionFinalCallback.next();
   }
@@ -51,6 +61,10 @@ export class CallbacksService {
     this._commandComponentCallback.next();
   }
 
+  public setIsViaRouteSignal(isRouted: ParsedPostTree | null): void {
+    this._isViaRouteSignal.next(isRouted);
+  }
+
   public setCommandOutputComponentCallback(): void {
     this._commandOutputComponentCallback.next();
   }
@@ -61,9 +75,5 @@ export class CallbacksService {
 
   public setCommandCallback(): void {
     this._commandCallback.next();
-  }
-
-  public createCallback<T>(): Subject<T> {
-    return new Subject<T>();
   }
 }

@@ -4,7 +4,7 @@ import {ParsedPostTree} from "../models/posts-tree.model";
 import {Processor} from "../core/processor";
 
 
-//TODO remove providedIn and add provide in component
+// TODO: Remove providedIn from service and use provide in the component for more explicit dependency injection
 
 
 export class PostsTransformer extends TransformerAbstract<PostsTree, ParsedPostTree> {

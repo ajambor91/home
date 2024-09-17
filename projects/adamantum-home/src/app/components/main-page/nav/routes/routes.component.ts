@@ -1,22 +1,19 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from "@angular/core";
 import {PostsService} from "../../../../services/posts.service";
 import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf, NgSwitch, NgTemplateOutlet} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {Observable} from "rxjs";
 import {CallbacksService} from "../../../../services/callbacks.service";
-import {Store} from "@ngrx/store";
 import {ParsedPostTree} from "../../../../models/posts-tree.model";
 import {RoutePathHelper} from "../../../../helpers/route-path.helper";
-
+import {DynamicComponentService} from "../../../../services/dynamic-component.service";
 
 @Component({
   selector: 'app-nav',
   standalone: true,
   templateUrl: './routes.component.html',
   styleUrls: ['./routes.component.scss'],
-  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   imports: [
     NgForOf,
     RouterLink,
@@ -28,24 +25,28 @@ import {RoutePathHelper} from "../../../../helpers/route-path.helper";
     NgTemplateOutlet
   ]
 })
-export class RoutesComponent {
-  @ViewChild('commandElement') commandElement!: ElementRef;
-
-
+export class RoutesComponent implements AfterViewInit {
   @Input() public lastLoginDate!: string | null;
   public RoutePathHelper: typeof RoutePathHelper = RoutePathHelper;
+  public routes$: Observable<ParsedPostTree[] | null> = this._postsService.getPosts$();
+  @ViewChild('commandElement') private _commandElement!: ElementRef;
 
-  public routes$: Observable<ParsedPostTree[] | null> = this.postsService.getPosts$();
-
-
-  constructor(private postsService: PostsService, private callbackService: CallbacksService, private store: Store) {
-
+  constructor(
+    private _postsService: PostsService,
+    private _callbackService: CallbacksService,
+    private _dynamicComponentService: DynamicComponentService
+  ) {
   }
 
-
+  public ngAfterViewInit(): void {
+    this._routeByURL();
+  }
 
   public selectAndPassComponent(route: ParsedPostTree): void {
-    this.callbackService.setArticleComponentCallback(route);
+    this._callbackService.setArticleComponentCallback(route);
   }
 
+  private _routeByURL(): void {
+    this._dynamicComponentService.routeByURL();
+  }
 }

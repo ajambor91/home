@@ -12,7 +12,7 @@ import {CallbacksService} from "../../../services/callbacks.service";
   standalone: true,
   templateUrl: './generic-post.component.html',
   styleUrls: ['./generic-post.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 
   imports: [
     GreetingComponentComponent,

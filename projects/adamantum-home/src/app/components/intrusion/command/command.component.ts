@@ -11,19 +11,19 @@ import {CallbacksService} from '../../../services/callbacks.service';
 })
 export class CommandComponent implements AfterViewInit {
 
-  @Input() input!: string[];
-  @ViewChild('commandElement') commandElement!: ElementRef;
+  @Input() public input!: string[];
+  @ViewChild('commandElement') public commandElement!: ElementRef;
 
-  private typed!: Typed;
+  private _typed!: Typed;
 
-  constructor(private callbacksService: CallbacksService) {
+  constructor(private _callbacksService: CallbacksService) {
   }
 
   public ngAfterViewInit(): void {
-    this.typed = new Typed(this.commandElement.nativeElement, {
+    this._typed = new Typed(this.commandElement.nativeElement, {
       strings: this.input,
       typeSpeed: 50,
-      onComplete: () => this.callbacksService.setCommandComponentCallback()
+      onComplete: () => this._callbacksService.setCommandComponentCallback()
     });
   }
 }

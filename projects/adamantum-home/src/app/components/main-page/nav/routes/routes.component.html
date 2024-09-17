@@ -3,8 +3,9 @@
     <h2 class="visually-hidden" id="directory-heading">Directory Structure</h2>
     <ul aria-label="Directory list" class="directory__list">
       <ng-container *ngFor="let route of routes;">
-        <li [ngClass]="{'tree-branch': (route?.children?.length || 0) > 0, 'tree-last': (route?.children?.length || 0) === 0}"
-            class="directory__item">
+        <li
+          [ngClass]="{'tree-branch': (route?.children?.length || 0) > 0, 'tree-last': (route?.children?.length || 0) === 0}"
+          class="directory__item">
           <ng-container *ngIf="route.categoryParentId">
             <span class="directory__root">{{ route.parentCategoryName }}</span>
             <ul class="directory__sublist">
@@ -32,8 +33,9 @@
 <ng-template #itemTemplate let-children>
   <ul class="directory__sublist">
     <ng-container *ngFor="let child of children">
-      <li [ngClass]="{'tree-branch': (child?.children?.length || 0) > 0, 'tree-last': (child?.children?.length || 0) === 0}"
-          class="directory__item">
+      <li
+        [ngClass]="{'tree-branch': (child?.children?.length || 0) > 0, 'tree-last': (child?.children?.length || 0) === 0}"
+        class="directory__item">
         <ng-container *ngIf="child.children && child.children.length > 0">
           <span class="directory__subitem">{{ child.categoryName }}</span>
           <ul class="directory__sublist">
@@ -42,7 +44,8 @@
           </ul>
         </ng-container>
         <ng-container *ngIf="!child.children || child.children.length === 0">
-          <a (click)="selectAndPassComponent(child)" [routerLink]="RoutePathHelper.createPath(child)" [state]="{item: child}"
+          <a (click)="selectAndPassComponent(child)" [routerLink]="RoutePathHelper.createPath(child)"
+             [state]="{item: child}"
              class="directory__link">{{ child.postTitle }}</a>
         </ng-container>
       </li>
