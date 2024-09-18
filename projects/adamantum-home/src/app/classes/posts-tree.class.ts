@@ -3,7 +3,7 @@ import {PostTree} from "shared-types";
 export class PostsTreeClass implements PostTree {
   public categoryId: number | null;
   public categoryName: string | null;
-  public createdA: string;
+  public createdAt: string;
   public fullPath: string;
   public parentCategoryName: string | null;
   public postId: number;
@@ -13,7 +13,7 @@ export class PostsTreeClass implements PostTree {
   public constructor(
     categoryId: number | null,
     categoryName: string | null,
-    createdA: string,
+    createdAt: string,
     fullPath: string,
     parentCategoryName: string | null,
     postId: number,
@@ -25,7 +25,7 @@ export class PostsTreeClass implements PostTree {
     this.postTitle = postTitle;
     this.postId = postId;
     this.parentCategoryName = parentCategoryName;
-    this.createdA = createdA;
+    this.createdAt = createdAt;
     this.categoryParentId = categoryParentId;
     this.fullPath = fullPath;
   }

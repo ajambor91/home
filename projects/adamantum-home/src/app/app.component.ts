@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit {
         filter(posts => !!posts && posts.length > 0),
         take(1)
       ).subscribe(result => {
-        const splittedPath: string[] = currentURL.replace(/^\/article\//, '').split('/');
+        const splittedPath: string[] = decodeURIComponent(currentURL.replace(/^\/article\//, '')).split('/');
         const item: ParsedPostTree = this._findComponent(splittedPath, result)[0];
         this._dynamicComponentsService.createMainPage(this._mainContainer);
         this._callbackService.setIsViaRouteSignal(item);
@@ -81,7 +81,6 @@ export class AppComponent implements AfterViewInit {
         }
       }
     }
-
     return pathArr;
   }
 }

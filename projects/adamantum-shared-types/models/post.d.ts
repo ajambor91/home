@@ -40,7 +40,7 @@ export interface PostEntity extends Omit<Post, 'postId' | 'createdAt'> {
 }
 
 export interface PostTree {
-  createdA: string;
+  createdAt: string;
   postId: number;
   postTitle: string;
   fullPath: string;

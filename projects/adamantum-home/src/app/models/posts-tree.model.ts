@@ -1,5 +1,5 @@
 export interface ParsedPostTree {
-  createdA: string;
+  createdAt: string;
   postId: number;
   postTitle: string;
   fullPath: string;

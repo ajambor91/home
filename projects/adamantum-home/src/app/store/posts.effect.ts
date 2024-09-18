@@ -5,13 +5,14 @@ import {catchError, map, mergeMap, switchMap} from "rxjs";
 import {inject} from "@angular/core";
 import {PostsTree} from "../../../../adamantum-shared-types";
 import {PostsService} from "../services/posts.service";
+import {ParsedPostTree} from "../models/posts-tree.model";
 
 export const loadPostsEffect = createEffect(
   (actions$: Actions = inject(Actions), postsService: PostsService = inject(PostsService)) => {
     return actions$.pipe(
       ofType(loadPosts),
       mergeMap(() => postsService.getPostsTree$().pipe(
-        map((posts: PostsTree) => loadPostsSuccess({posts})),
+        map((posts: ParsedPostTree[]) => loadPostsSuccess({posts})),
         catchError(error => [loadPostsFailure({error})])
       ))
     )

@@ -1,6 +1,7 @@
 import {createReducer, on} from "@ngrx/store";
 import {loadPostsSuccess, loadPostSuccess} from "./posts.actions";
 import {PostEntity, PostsTree} from "../../../../adamantum-shared-types";
+import {ParsedPostTree} from "../models/posts-tree.model";
 
 const initialState: PostState = {
   posts: [],
@@ -9,7 +10,7 @@ const initialState: PostState = {
 }
 
 export interface PostState {
-  posts: PostsTree;
+  posts: ParsedPostTree[];
   contentPosts: PostEntity[];
   error: any;
 }
