@@ -120,7 +120,7 @@ export const getEntity = <T extends EntityClass>(cls: new (...args: any[]) => T,
 };
 
 
-export const getTimestamp: (date: Date | undefined) => number = (date: Date | undefined) => {
+export const getTimestamp: (date: Date | undefined | null) => number = (date: Date | undefined | null) => {
   return !!date ? Math.floor(date.getTime() / 1000) : Math.floor(new Date().getTime() / 1000)
 }
 

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {Category, EditCategory, NewCategory, Posts} from "shared-types";
+import {Category, EditCategory, NewCategory, Post} from "shared-types";
 import {ApiService} from "./api.service";
 
 
@@ -9,7 +9,7 @@ export class CategoriesService {
   constructor(private _api: ApiService) {
   }
 
-  public getCategories$(): Observable<Posts> {
+  public getCategories$(): Observable<Post[]> {
     return this._api.getCategories$();
   }
 

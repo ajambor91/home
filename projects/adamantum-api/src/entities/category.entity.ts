@@ -1,26 +1,23 @@
 import {EntityClass} from "../core/abstract/entity.abstract";
-import {required} from "../core/decorators/entity.decorator";
-import {CategoryDTO} from "../data-transfer-objects/category.dto";
+import {Category} from "shared-types"
+export class CategoryEntity extends EntityClass implements Category{
+  public categoryId: number | null = null;
+  public categoryName: string | null = null;
+  public categoryParentId: number | null = null;
+  public createdAt: Date = new Date();
+  public deletedAt: Date | null = null;
+  public parentCategoryName: string | null = null;
 
-export class CategoryEntity extends EntityClass {
-  categoryId?: number | null;
-  @required
-  categoryName?: string | null;
-  categoryParent?: number | null;
-  @required
-  createdAt?: Date;
-  deletedAt?: Date | null;
-  parentCategoryName?: string | null;
-
-  constructor(dto: CategoryDTO) {
+  constructor(dto: CategoryEntity) {
     super();
-    this.categoryId = dto.categoryId;
-    this.categoryName = dto.categoryName;
-    this.categoryParent = dto.categoryParent;
-    this.createdAt = dto.createdAt;
-    this.deletedAt = dto.deletedAt;
-    this.parentCategoryName = dto.parentCategoryName;
+    this.categoryId = dto.categoryId ?? null;
+    this.categoryName = dto.categoryName ?? null;
+    this.categoryParentId = dto.categoryParentId ?? null;
+    this.createdAt = dto.createdAt ?? new Date();
+    this.deletedAt = dto.deletedAt ?? null;
+    this.parentCategoryName = dto.parentCategoryName ?? null;
   }
+
 
   public setCategoryId(categoryId: number): this {
     this.categoryId = categoryId;
@@ -32,8 +29,8 @@ export class CategoryEntity extends EntityClass {
     return this;
   }
 
-  public setCategoryParent(categoryParent?: number): this {
-    this.categoryParent = categoryParent;
+  public setCategoryParent(categoryParentId: number): this {
+    this.categoryParentId = categoryParentId;
     return this;
   }
 
@@ -44,7 +41,7 @@ export class CategoryEntity extends EntityClass {
     return this;
   }
 
-  public setDeletedAt(deletedAt?: Date): this {
+  public setDeletedAt(deletedAt: Date): this {
     this.deletedAt = deletedAt;
     return this;
   }

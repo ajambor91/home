@@ -34,6 +34,7 @@ export class PostRepository extends RepoClass {
   }
 
   public async addNew(entity: PostEntity): Promise<void> {
+    console.log(entity)
     await this.env.adamantumDb.prepare(ADD_POST).bind(entity.postTitle, entity.postContent, entity.fullPath, entity.categoryId, getTimestamp(entity.createdAt)).run();
   }
 

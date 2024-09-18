@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 
 import {catchError, map, mergeMap, switchMap} from "rxjs";
 import {inject} from "@angular/core";
-import {PostsTree} from "../../../../adamantum-shared-types";
+import {Post} from "../../../../adamantum-shared-types";
 import {PostsService} from "../services/posts.service";
 import {ParsedPostTree} from "../models/posts-tree.model";
 

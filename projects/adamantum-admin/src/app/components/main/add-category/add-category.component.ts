@@ -5,7 +5,7 @@ import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoriesService} from "../../../services/categories.service";
 import {CategoryEditForm, categoryForm} from "../../../forms/category.form";
 import {Observable} from "rxjs";
-import {NewCategory} from "shared-types";
+import {EditCategory, NewCategory} from "shared-types";
 import {CategoryFormComponent} from "../category-form/category-form.component";
 
 
@@ -26,7 +26,7 @@ export class AddCategoryComponent {
   constructor(private _categoriesService: CategoriesService) {
   }
 
-  public onSubmit(newCategory: NewCategory): void {
-    this._categoriesService.addCategory(newCategory);
+  public onSubmit(newCategory: NewCategory | EditCategory): void {
+    this._categoriesService.addCategory(newCategory as NewCategory);
   }
 }

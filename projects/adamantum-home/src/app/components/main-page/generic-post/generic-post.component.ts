@@ -3,7 +3,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from "@angular/co
 import {GreetingComponentComponent} from "../greeting-component/greeting-component.component";
 import {InputComponent} from "../../generic/input/input.component";
 import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
-import {PostEntity} from "../../../../../../adamantum-shared-types";
+import {Post} from "shared-types";
 import {CallbacksService} from "../../../services/callbacks.service";
 
 
@@ -24,12 +24,12 @@ import {CallbacksService} from "../../../services/callbacks.service";
   ]
 })
 export class GenericPostComponent {
-  public post!: PostEntity;
+  public post!: Post;
 
   constructor(private _cdr: ChangeDetectorRef, private _callbackService: CallbacksService) {
   }
 
-  public updateContent(content: PostEntity): void {
+  public updateContent(content: Post): void {
     this.post = content;
     this._cdr.detectChanges();
     this._callbackService.setComponentCreatedCallback();

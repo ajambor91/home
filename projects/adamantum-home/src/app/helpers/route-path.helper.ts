@@ -2,7 +2,7 @@ import {ParsedPostTree} from "../models/posts-tree.model";
 
 export class RoutePathHelper {
   public static createPath(item: ParsedPostTree): string {
-    if (!!item.categoryParentId) {
+    if (!!item.parentCategoryId) {
       return `/article/${item.parentCategoryName}/${item.categoryName}/${item.postTitle}`;
     } else if (!!item.categoryId) {
       return `/article/${item.categoryName}/${item.postTitle}`

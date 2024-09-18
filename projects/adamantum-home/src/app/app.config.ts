@@ -10,12 +10,12 @@ import {provideEffects} from "@ngrx/effects";
 import {PostsService} from "./services/posts.service";
 import {PostsTransformer} from "./transformers/posts.transformer";
 import {Processor} from "./core/processor";
-import {PostsTree} from "../../../adamantum-shared-types";
 import {ParsedPostTree} from "./models/posts-tree.model";
 import {IFormatInterface} from "./core/formatter.interfaces";
 import {FORMATTERS_TOKEN} from "./core/formatters.token";
 import {PostsFormatter} from "./formatters/post-tree.formatter";
 import {loadPostContentEffect, loadPostsEffect} from "./store/posts.effect";
+import {Post} from "../../../adamantum-shared-types";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,12 +33,12 @@ export const appConfig: ApplicationConfig = {
     PostsService,
     {
       provide: PostsTransformer,
-      useFactory: (processor: Processor<PostsTree, ParsedPostTree>) => new PostsTransformer(processor),
-      deps: [Processor<PostsTree, ParsedPostTree>]
+      useFactory: (processor: Processor<Post[], ParsedPostTree>) => new PostsTransformer(processor),
+      deps: [Processor<Post[], ParsedPostTree>]
     },
     {
       provide: Processor,
-      useFactory: (formatters: Array<IFormatInterface<PostsTree, ParsedPostTree>>) => new Processor(formatters),
+      useFactory: (formatters: Array<IFormatInterface<Post[], ParsedPostTree>>) => new Processor(formatters),
       deps: [FORMATTERS_TOKEN]
     },
     {

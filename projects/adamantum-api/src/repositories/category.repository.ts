@@ -37,7 +37,7 @@ export class CategoryRepository extends RepoClass {
   }
 
   public async addNew(entity: CategoryEntity): Promise<void> {
-    await this.env.adamantumDb.prepare(ADD_CATEGORY).bind(entity.categoryName, entity.categoryParent, getTimestamp(entity.createdAt)).run();
+    await this.env.adamantumDb.prepare(ADD_CATEGORY).bind(entity.categoryName, entity.categoryParentId, getTimestamp(entity.createdAt)).run();
   }
 
   public async getCategoriesTree(): Promise<CategoryEntity[]> {

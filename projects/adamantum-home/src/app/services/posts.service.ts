@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {map, Observable, of, switchMap, take} from "rxjs";
-import {PostEntity, PostTree} from "shared-types";
+import {Post} from "shared-types";
 import {PostsTransformer} from "../transformers/posts.transformer";
 import {Store} from "@ngrx/store";
 import {selectAllPosts, selectById} from "../store/posts.selectors";
@@ -24,16 +24,18 @@ export class PostsService {
   public getPostsTree$(): Observable<ParsedPostTree[]> {
     return this._postsApi.getPostsTree$().pipe(
       map(posts =>
-        posts.map<PostTree>(post =>
+        posts.map<Post>(post =>
           new PostsTreeClass(
-            post.categoryId,
-            post.categoryName,
-            post.createdAt,
-            post.fullPath,
-            post.parentCategoryName,
             post.postId,
             post.postTitle,
-            post.categoryParentId
+            post.createdAt,
+            post.deletedAt,
+            post.postContent,
+            post.fullPath,
+            post.categoryId,
+            post.categoryName,
+            post.parentCategoryName,
+            post.parentCategoryId
           )
         )
       ),
@@ -45,12 +47,12 @@ export class PostsService {
     return this._store.select(selectAllPosts).pipe(take(1));
   }
 
-  public getPost$(item: ParsedPostTree): Observable<PostEntity> {
-    return this._postsApi.getPost$(item.postId);
+  public getPost$(item: ParsedPostTree): Observable<Post> {
+    return this._postsApi.getPost$(item.postId as number);
   }
 
-  public getPostFromStore$(item: ParsedPostTree): Observable<PostEntity | undefined> {
-    return this._store.select(selectById(item.postId)).pipe(
+  public getPostFromStore$(item: ParsedPostTree): Observable<Post | undefined> {
+    return this._store.select(selectById(item.postId as number)).pipe(
       take(1),
       switchMap(article => {
         if (!!article) {

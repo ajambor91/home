@@ -1,35 +1,34 @@
 import {EntityClass} from "../core/abstract/entity.abstract";
 import {required} from "../core/decorators/entity.decorator";
-import {PostDTO} from "../data-transfer-objects/post.dto";
-
-export class PostEntity extends EntityClass {
-  postId?: number | null;
+import {Post } from  "shared-types"
+export class PostEntity extends EntityClass implements Post{
+  postId: number | null;
   @required
-  postTitle?: string;
+  postTitle: string | null;
   @required
-  postContent?: string;
-  fullPath?: string;
+  postContent?: string | null;
+  fullPath?: string | null;
   categoryId?: number | null;
   @required
-  createdAt?: Date;
+  createdAt: Date | null;
   deletedAt?: Date | null;
   categoryName?: string | null;
   parentCategoryName?: string | null;
-  categoryParentId?: number | null;
+  parentCategoryId?: number | null;
 
-  constructor(dto: PostDTO) {
+  constructor(data: Post) {
     super();
-    this.postId = dto.postId;
-    this.postTitle = dto.postTitle;
-    this.postContent = dto.postContent;
-    this.fullPath = dto.fullPath;
-    this.categoryId = dto.categoryId;
-    this.categoryName = dto.categoryName;
-    this.categoryId = dto.categoryId;
-    this.parentCategoryName = dto.parentCategoryName;
-    this.createdAt = dto.createdAt;
-    this.deletedAt = dto.deletedAt;
-    this.categoryParentId = dto.categoryParentId;
+    this.postId = data.postId ?? null;
+    this.postTitle = data.postTitle ?? null;
+    this.postContent = data.postContent ?? null;
+    this.fullPath = data.fullPath ?? null;
+    this.categoryId = data.categoryId ?? null;
+    this.categoryName = data.categoryName ?? null;
+    this.parentCategoryName = data.parentCategoryName ?? null;
+    this.createdAt = data.createdAt ?? null;
+    this.deletedAt = data.deletedAt ?? null;
+    this.parentCategoryId = data.parentCategoryId ?? null;
+
   }
 
   public setPostId(postId: number): this {
@@ -52,7 +51,7 @@ export class PostEntity extends EntityClass {
     return this;
   }
 
-  public setCategoryId(categoryId?: number): this {
+  public setCategoryId(categoryId: number): this {
     this.categoryId = categoryId;
     return this;
   }
@@ -64,7 +63,7 @@ export class PostEntity extends EntityClass {
     return this;
   }
 
-  public setDeletedAt(deletedAt?: Date): this {
+  public setDeletedAt(deletedAt: Date): this {
     this.deletedAt = deletedAt;
     return this;
   }

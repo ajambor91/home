@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {Post, Posts} from "shared-types";
+import {Post} from "shared-types";
 import {Observable} from "rxjs";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
 import {PostFormComponent} from "../post-form/post-form.component";
@@ -18,7 +18,7 @@ import {Action, ActionTypes, postsTable, TableConfig} from "../../../core/table.
 
 })
 export class PostsListComponent {
-  public posts$: Observable<Posts> = this._postsService.getPosts$() as Observable<Array<any>>;
+  public posts$: Observable<Post[]> = this._postsService.getPosts$() as Observable<Array<any>>;
   public page: number = 0;
   public currentPage: number = 0;
   public totalPages: number = 0;
@@ -44,7 +44,7 @@ export class PostsListComponent {
   }
 
   private deletePost(post: Post): void {
-    this._postsService.deletePost(post.postId)
+    this._postsService.deletePost(post.postId as number)
     this.posts$ = this._postsService.getPosts$();
   }
 

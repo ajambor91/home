@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {Category, EditCategory, Posts} from "shared-types";
+import {Category, EditCategory, Post} from "shared-types";
 import {Observable} from "rxjs";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
 import {PostFormComponent} from "../post-form/post-form.component";
@@ -19,7 +19,7 @@ import {CategoriesService} from "../../../services/categories.service";
 
 })
 export class CategoriesListComponent {
-  public categories$: Observable<Posts> = this._categoriesService.getCategories$() as Observable<Array<any>>;
+  public categories$: Observable<Post[]> = this._categoriesService.getCategories$() as Observable<Array<any>>;
   public tableConfig: TableConfig = categoryTable;
 
   constructor(private _categoriesService: CategoriesService, private _router: Router) {

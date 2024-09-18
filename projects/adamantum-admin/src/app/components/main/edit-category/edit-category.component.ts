@@ -32,7 +32,7 @@ export class EditCategoryComponent implements OnInit {
   }
 
   public onSubmit(category: EditCategory | NewCategory): void {
-    const editedCategory: EditCategory = category;
+    const editedCategory: EditCategory = category as EditCategory;
     this._categoriesService.editCategory(editedCategory);
   }
 

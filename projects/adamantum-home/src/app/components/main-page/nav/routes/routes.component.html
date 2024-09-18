@@ -6,21 +6,21 @@
         <li
           [ngClass]="{'tree-branch': (route?.children?.length || 0) > 0, 'tree-last': (route?.children?.length || 0) === 0}"
           class="directory__item">
-          <ng-container *ngIf="route.categoryParentId">
+          <ng-container *ngIf="route.parentCategoryId">
             <span class="directory__root">{{ route.parentCategoryName }}</span>
             <ul class="directory__sublist">
               <ng-template [ngTemplateOutletContext]="{ $implicit: route.children }"
                            [ngTemplateOutlet]="itemTemplate"></ng-template>
             </ul>
           </ng-container>
-          <ng-container *ngIf="route.categoryId && !route.categoryParentId">
+          <ng-container *ngIf="route.categoryId && !route.parentCategoryId">
             <span class="directory__subitem">{{ route.categoryName }}</span>
             <ul class="directory__sublist">
               <ng-template [ngTemplateOutletContext]="{ $implicit: route.children }"
                            [ngTemplateOutlet]="itemTemplate"></ng-template>
             </ul>
           </ng-container>
-          <ng-container *ngIf="!route.categoryId && !route.categoryParentId">
+          <ng-container *ngIf="!route.categoryId && !route.parentCategoryId">
             <a (click)="selectAndPassComponent(route)" [routerLink]="RoutePathHelper.createPath(route)"
                class="directory__link">{{ route.postTitle }}</a>
           </ng-container>

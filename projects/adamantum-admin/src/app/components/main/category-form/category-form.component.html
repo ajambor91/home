@@ -6,7 +6,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label" for="category">Kategoria</label>
-      <select class="form-select" formControlName="categoryParent" id="category">
+      <select class="form-select" formControlName="categoryParentId" id="category">
         <option disabled selected value="">Wybierz kategorię</option>
         <option *ngFor="let category of categories$ | async" [value]="category.categoryId">{{ category.categoryName }}
         </option>

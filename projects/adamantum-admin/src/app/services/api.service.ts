@@ -2,7 +2,8 @@ import {inject, Injectable} from "@angular/core";
 import {EnvironmentsService} from "./environments.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category, CategoryForm, EditCategory, EditPost, NewPost, Post, UserLogin} from "shared-types";
+import {Category, EditCategory, EditPost, NewCategory, NewPost, Post, UserLogin} from "shared-types";
+import {CategoryEntity} from "../../../../adamantum-api/src/entities/category.entity";
 
 
 @Injectable({providedIn: 'root'})
@@ -32,7 +33,7 @@ export class ApiService {
     return this.httpClient.delete<void>(`${this._apiUrl}posts/${id}`)
   }
 
-  public addCategory$(category: CategoryForm): Observable<void> {
+  public addCategory$(category: NewCategory): Observable<void> {
     return this.httpClient.post<void>(`${this._apiUrl}categories`, category)
 
   }
@@ -51,6 +52,6 @@ export class ApiService {
   }
 
   public getCategory$(categoryId: number): Observable<Category> {
-    return this.httpClient.get<Category>(`${this._apiUrl}categories/${categoryId}`);
+    return this.httpClient.get<CategoryEntity>(`${this._apiUrl}categories/${categoryId}`);
   }
 }

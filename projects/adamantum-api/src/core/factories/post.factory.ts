@@ -35,7 +35,7 @@ export class PostViewDetailsFactory extends PostFactory {
     });
   }
 }
-
+//TODO change categoryParentId to parentCategoryId in database
 export class FullPostFactory extends PostFactory {
   protected create(data: any): PostEntity {
     return new PostEntity({
@@ -47,7 +47,7 @@ export class FullPostFactory extends PostFactory {
       categoryName: data.categoryName || null,
       parentCategoryName: data.parentCategoryName || null,
       createdAt: new Date(data.createdAt),
-      categoryParentId: data.categoryParentId || null
+      parentCategoryId: data.categoryParentId || null
     });
   }
 }

@@ -4,20 +4,18 @@ import {LocalDataService} from "./services/local-data.service";
 import {DynamicComponentService} from "./services/dynamic-component.service";
 import {CallbacksService} from "./services/callbacks.service";
 import {filter, take} from "rxjs";
-import {ApiService} from "./services/api.service";
 import {EnvironmentsService} from "./services/environments.service";
 import {Store} from "@ngrx/store";
 import {loadPosts} from "./store/posts.actions";
 import {selectAllPosts} from "./store/posts.selectors";
 import {ParsedPostTree} from "./models/posts-tree.model";
-import {Actions} from "@ngrx/effects";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
-  providers: [LocalDataService, DynamicComponentService, CallbacksService, ApiService, EnvironmentsService, Store],
+  providers: [LocalDataService, DynamicComponentService, CallbacksService, EnvironmentsService, Store],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -29,7 +27,6 @@ export class AppComponent implements AfterViewInit {
     private _dynamicComponentsService: DynamicComponentService,
     private _callbackService: CallbacksService,
     private _store: Store,
-    private _actions$: Actions
   ) {
   }
 

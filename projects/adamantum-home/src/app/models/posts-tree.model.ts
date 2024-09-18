@@ -1,12 +1,12 @@
 export interface ParsedPostTree {
-  createdAt: string;
-  postId: number;
-  postTitle: string;
-  fullPath: string;
-  categoryId: null | number;
-  categoryName: string | null
-  parentCategoryName: string | null;
-  categoryParentId: number | null;
+  createdAt: Date | null;
+  postId: number | null;
+  postTitle: string | null;
+  fullPath?: string | null;
+  categoryId?: null | number;
+  categoryName?: string | null
+  parentCategoryName?: string | null;
+  parentCategoryId?: number | null;
   children?: ParsedPostTree[];
 }
 

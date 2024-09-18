@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, take} from "rxjs";
-import {EditPost, NewPost, Posts} from "shared-types";
+import {EditPost, NewPost, Post} from "shared-types";
 import {ApiService} from "./api.service";
 import {PostsApiService} from "../../../../adamantum-api-reqs/src/lib/posts/posts.api.service";
 import {PostForm} from "../forms/post-new.form";
@@ -14,7 +14,7 @@ export class PostsService {
   }
 
 
-  public getPosts$(): Observable<Posts> {
+  public getPosts$(): Observable<Post[]> {
     return this._postsApi.getPosts$().pipe(take(1));
   }
 
